@@ -1,0 +1,28 @@
+#fig-intro img,
+{
+  margin: -10% 0;
+}
+
+#fig-wp-ts img,
+{
+  width: 50%;
+}
+
+#fig-hist img,
+{
+  display: inline-block;
+  padding: 2em 0.5em;
+
+  &[src="fig-histu.png"],
+  { width: 36.5%; }
+
+  &[src="fig-hists.png"],
+  { width: 30.5%; }
+
+  &[src="fig-histb.png"],
+  { width: 30%; }
+}
+
+@media(min-width:72rem) {
+  #fig-hist img[src="fig-histu.png"] { width: 37.25%; }
+}

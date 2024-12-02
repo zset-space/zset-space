@@ -1,0 +1,211 @@
+// Styling for the header
+
+body[id],
+{
+  > header,
+  {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    height: 10.75rem;
+    justify-content: center;
+    margin: -10.75rem 0 0 0;
+    position: sticky;
+    top: -6.75rem;
+    z-index: 1;
+
+    > nav,
+    {
+      flex: 0 1 70rem;
+      height: 3.75rem;
+      line-height: 2.75rem;
+      padding: 0.5rem 1rem;
+      position: sticky;
+      text-align: right;
+      top: 0;
+
+      > button,
+      {
+        border-radius: 1.375rem;
+        border: 0;
+        color: $dark;
+        cursor: pointer;
+        float: right;
+        height: 2.75rem;
+        margin: 0 0 0 -2.75rem;
+        outline: 0 outset $primary;
+        padding: 0;
+        position: relative;
+        width: 2.75rem;
+        z-index: 2;
+
+        &:focus,
+        { outline: 0 outset $primary; }
+
+        &[autofocus],
+        {
+          z-index: 3;
+        }
+
+        &[autofocus]:focus,
+        {
+          @include text-shadow;
+          color: $primary;
+          outline-width: medium;
+          z-index: 2;
+        }
+
+        &:hover:not([autofocus]:focus),
+        {
+          color: darken($primary, 20%);
+          outline-width: medium;
+        }
+      }
+
+      > button ~ ul,
+      {
+        @include box-shadow;
+        align-items: center;
+        background-color: $primary;
+        border-radius: 1.375rem;
+        display: grid;
+        float: right;
+        gap: 0 0;
+        grid-template-columns: auto;
+        list-style: none;
+        margin: 0 0 0 -100%;
+        max-height: 20vh;
+        min-height: 2.75rem;
+        min-width: 2.75rem;
+        overflow: hidden;
+        padding: 0;
+        position: relative;
+        right: 0rem;
+        scroll-snap-type: y mandatory;
+        scrollbar-color: $main $primary;
+        text-overflow: ellipsis;
+        z-index: 1;
+
+        > li,
+        { scroll-snap-align: start none; }
+
+        > li > a,
+        { text-align: center; }
+
+        > li,
+        > li > a,
+        {
+          @include navbar-font;
+          color: $dark;
+          display: inline-block;
+          font-weight: 400;
+          line-height: 0rem;
+          opacity: 0;
+          outline: none;
+          text-decoration: none;
+          text-overflow: ellipsis;
+          text-shadow: 0 0 0.025em $light;
+          vertical-align: top;
+          white-space: nowrap;
+          width: 0rem;
+
+          &:active,
+          &:hover,
+          &:target,
+          {
+            background-color: lighten($primary, 20%);
+            color: lighten($dark, 20%);
+            text-shadow: none;
+          }
+
+          &:active,
+          {
+            background-color: lighten($primary, 30%);
+            color: lighten($dark, 30%);
+          }
+
+          &:target,
+          { font-style: italic; }
+        }
+      }
+
+      > button ~ ul:focus-within,
+      > button ~ ul:hover,
+      > button[autofocus]:focus ~ ul,
+      {
+        overflow-y: auto;
+        right: 3rem;
+
+        > li,
+        > li > a,
+        {
+          line-height: 2.75rem;
+          opacity: 1;
+          overflow: hidden;
+          width: 13rem;
+        }
+      }
+
+      > button[autofocus]:hover:not(:focus) ~ ul:not(:focus-within),
+      { background-color: lighten($primary, 20%); }
+
+      > a,
+      {
+        @include logo-font;
+        @include text-shadow;
+        color: $gray-400;
+        float: left;
+        font-size: 1.875rem;
+        position: relative;
+        text-decoration: none;
+        z-index: 0;
+
+        &:active,
+        &:focus,
+        &:hover,
+        { color: lighten($gray-400, 30%); }
+
+        &#nav-zset,
+        {
+          color: $primary;
+          font-family: "Rubik Glitch";
+          vertical-align: top;
+
+          &:hover,
+          { color: $secondary; }
+        }
+      }
+    }
+  }
+}
+
+@media(min-width:36rem) {
+  body[id] > header > nav > button ~ ul { grid-template-columns: auto auto; }
+}
+
+@media(min-width:54rem) {
+  body[id] > header > nav > button ~ ul { grid-template-columns: auto auto auto; }
+}
+
+@media(min-width:72rem) {
+  body[id] > header > nav > button ~ ul { grid-template-columns: auto auto auto auto; }
+}
+
+@media(prefers-reduced-motion:no-preference) {
+  body[id] > header > nav > button,
+  {
+    transition: color 0.5s, text-shadow 0.5s, outline-width 0.125s;
+
+    ~ a,
+    { transition: color 0.5s, text-shadow 0.5s; }
+
+    ~ ul,
+    { transition: opacity 0.5s, background-color 0.5s, right 0.5s 0.25s; }
+
+    ~ ul > li,
+    { transition: line-height 0.25s, background-color 0.5s, opacity 0.5s, width 0.5s; }
+
+    ~ ul > li > a,
+    { transition: line-height 0.25s, background-color 0.5s, opacity 0.5s 0.25s, width 0.5s 0.25s; }
+  }
+}

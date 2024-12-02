@@ -1,0 +1,69 @@
+tz: America/Chicago
+title: zset.space
+author: C Anthony Risinger
+authorurl: https://zset.space
+description: >-
+  zset.space
+
+host: 0.0.0.0
+open_url: true
+encoding: utf-8
+strict_front_matter: true
+
+exclude:
+  - "*/Makefile"
+  - "*/latexmkrc"
+  - .sass-cache
+  - ZSET/*.txt
+  - ZSET/ZSET.*
+  - Gemfile
+  - Gemfile.lock
+  - Makefile
+  - node_modules
+  - vendor/
+
+plugins:
+  - jekyll-mentions
+  - jekyll-readme-index
+  - jekyll-redirect-from
+  - jekyll-relative-links
+  - jekyll-sitemap
+  - jemoji
+
+liquid:
+  error_mode: strict
+  strict_filters: true
+  # Too many exceptions with no clear solutions.
+  # strict_variables: true
+
+kramdown:
+  show_warnings: true
+
+sass:
+  style: compressed
+  sourcemap: development
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      # 10 years in the future.
+      date: 2033-10-03 10:00:00 -0500
+      layout: article
+      newline: "\n"
+      title: Geometric Root of Quantum Behavior (ZSET)
+      intro: S⁰ Emergence Theory 
+  - scope:
+      path: README.md
+    values:
+      date: 2024-12-01 10:00:00 -0500
+      last_modified_at: 2024-12-02 02:00:00 -0500
+  - scope:
+      path: ZSET/*
+    values:
+      categories: [ZSET]
+      title: Zero-Sphere Emergence Theory (ZSET)
+      intro: |-
+        Geometric Root
+        Quantum Behavior

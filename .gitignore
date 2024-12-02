@@ -1,8 +1,14 @@
-/scratch
-
-/index.html
-
 _build
+*.aux
+*.log
+*.gem
+/_site
+/vendor
+/scratch
+/index.html
+.sass-cache
+.jekyll-metadata
+!samples/**
 
 # Logs
 logs

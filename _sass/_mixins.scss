@@ -1,0 +1,29 @@
+// Mixins
+
+// Shadow Mixins
+@mixin text-shadow {
+  text-shadow: 0 0.03125em 0.25em $dark, 0 0.03125em 0.1875em $dark, 0 0.03125em 0.125em $dark, 0 0.03125em 0.0625em $tertiary;
+}
+@mixin box-shadow {
+  box-shadow: 0 0.03125em 0.25em $dark, 0 0.03125em 0.1875em $dark, 0 0.03125em 0.125em $dark, 0 0.03125em 0.0625em $tertiary;
+}
+
+// Font Mixins
+@mixin serif-font {
+  font-family: 'Roboto Slab', 'Garamond', 'Georgia', serif;
+}
+@mixin body-font {
+  font-family: 'Roboto Slab', 'Garamond', 'Georgia', serif;
+}
+@mixin heading-font {
+  font-family: 'Kanit', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+@mixin navbar-font {
+  font-family: 'Rubik', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+@mixin logo-font {
+  font-family: 'Kanit', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+@mixin intro-font {
+  font-family: 'Zen Dots', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
