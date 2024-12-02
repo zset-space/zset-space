@@ -1,46 +1,66 @@
 # Zero-Sphere Emergence Theory (ZSET)
 
-[Read the full paper](https://zset.space/ZSET.pdf)
+ZSET demonstrates that quantum mechanics emerges from geometric constraints, showing how mathematical structures generate quantum behavior through dimensional transitions.
 
-At its foundation, our universe appears to operate through a remarkably simple principle: rotation. The Zero-Sphere Emergence Theory suggests that quantum mechanics emerges naturally from this geometric foundation, specifically from examining the space that exists between dimensions.
+[Read the Mathematical Framework](https://zset.space/ZSET.pdf) | [Project Website](https://zset.space) | [Source Code](https://github.com/zset-space/zset-space)
 
-## The Bottom Line
+ZSET identifies a mathematical object that manifests simultaneously as point, line, and circle, distributing across real and imaginary domains.
 
-This theory begins at this boundary: examining the mathematical space that exists precisely between zero and one dimension. This space captures both the point-like and circular nature of rotation simultaneously, providing a framework that remains consistent across all scales. When we describe rotation in this space using complex numbers, we discover a mathematical description that transcends dimensional boundaries while preserving essential geometric relationships.
+## Mathematical Foundation
 
-## From Geometry to Physics
+Complex numbers display fundamental rotational behavior: under repeated exponentiation, they flow toward fixed points at 1, -1, or return to their starting point, with zero as their harmonic center. The gamma function provides smooth interpolation between dimensions, establishing a continuous foundation for dimensional transitions. This rotational and interpolative behavior persists through dimensional additions, with each dimension inheriting these properties. These mathematical characteristics directly correspond to quantum phase relationships and wave function evolution.
 
-The consistency requirements between zero- and one-dimensional perspectives generate quantum mechanical behavior as a geometric necessity. The mathematical space that captures these relationships reveals why quantum mechanics takes the exact form we observe in nature. Wave behavior, uncertainty relationships, and quantum interference emerge as requirements for maintaining consistent geometric descriptions across dimensional boundaries.
+The theory extends projective geometry's demonstration that a point and the line at infinity represent equivalent objects under reference frame changes. This equivalence characterizes the relationship between real and imaginary components. At dimensional interfaces, a stable reference frame emerges where:
 
-The theory demonstrates that quantum behavior isn't fundamentally about small scales - it's about what happens when we examine systems at dimensional interfaces where both point-like and extended descriptions become equally valid. This perspective explains why quantum effects become prominent under specific conditions while remaining consistent with classical behavior at larger scales.
+- Points expand into reference spaces while maintaining containment
+- Objects maintain reference through transitions
+- Internal and external perspectives yield complete descriptions
 
-## Physical Reality
+## Theoretical Framework
 
-The geometric foundation generates precise predictions about physical phenomena. The framework reveals how quantum effects emerge at dimensional interfaces, providing specific, testable predictions for magnetic fields, temperature thresholds, and measurement requirements. These predictions arise directly from geometric consistency requirements rather than imposed physical rules.
+The geometric transitions between dimensions generate quantum behavior through mathematical constraints. The framework shows that:
 
-When we examine how electrons move in materials, how quantum states evolve, or how particles interfere with each other, we find patterns that align exactly with what this rotational framework requires. The theory specifies precise conditions under which these geometric effects become observable, all emerging from the underlying rotational structure.
+- Wave-particle duality emerges from point-like and extended descriptions
+- Dimensional transitions produce quantum interference through phase accumulation
+- Dimensional interfaces generate uncertainty relationships
+- Measurement reflects transitions between reference frames
 
-## Understanding Quantum Mechanics
+Plastic ratio relationships govern three-dimensional extension, while golden ratio relationships determine surface and boundary transitions. The structure maintains complete description across all reference frames.
 
-Through this dimensional interface perspective, quantum mechanics emerges as a necessary consequence of geometric consistency. Features that appear mysterious in conventional interpretations - wave-particle duality, quantum superposition, phase relationships - arise naturally from the requirements of maintaining consistent descriptions across dimensional boundaries.
+## Physical Implications
 
-The framework reveals how quantum behavior represents the fundamental geometry of our universe expressing itself. Rather than requiring special physical rules, quantum mechanics reflects the mathematical necessity of preserving rotational relationships across dimensional interfaces.
+The geometric structure generates experimental predictions:
 
-## Implications
+- Quantum Hall conductance modifications
+- Quantum system coherence length corrections
+- Phase relationship preservation mechanisms
+- Interference pattern changes
 
-This geometric understanding opens new approaches for examining quantum systems. The theory provides specific insights into:
+The framework specifies experimental parameters:
 
-- The emergence of quantum behavior at dimensional boundaries
-- Preservation of quantum information during geometric transitions
-- Requirements for maintaining quantum coherence
-- Conditions that determine quantum versus classical behavior
+- Magnetic field requirements
+- Temperature limits
+- Spatial resolution thresholds
+- Temporal precision bounds
 
-These insights arise directly from the geometric framework while maintaining clear connections to observable phenomena.
+## Getting Started
 
-For the complete mathematical framework, including detailed derivations and proofs, see the [full paper](https://zset.space/ZSET.pdf).
+To explore ZSET:
 
-## Future Directions
+1. Review the [mathematical framework](https://zset.space/ZSET.pdf)
+2. Examine the [introductory materials](https://zset.space)
+3. Study the [source code](https://github.com/zset-space/zset-space)
+4. Participate through GitHub issues
 
-Understanding quantum mechanics through dimensional interfaces reveals new directions for both theoretical investigation and practical application. The framework suggests specific approaches for examining how geometric consistency requirements manifest in physical systems, potentially leading to new methods for controlling and utilizing quantum behavior.
+## Development Status
 
-The theory continues to develop as we explore its implications across physical and mathematical domains. Its value lies in providing a geometrically motivated foundation for understanding quantum phenomena - not as mysterious exceptions to classical physics, but as necessary consequences of maintaining consistent geometric relationships across dimensional boundaries.
+Work addresses:
+
+- Physical prediction refinement
+- Experimental protocol development
+- Mathematical framework extension
+- Theoretical implication analysis
+
+ZSET shows quantum mechanics as the mathematical description of dimensional transitions. Quantum mechanical features arise from maintaining consistent geometric descriptions across reference frames. The framework derives quantum behavior from geometry while preserving classical physics in appropriate limits.
+
+[Project Website](https://zset.space) | [Source Code](https://github.com/zset-space/zset-space)
