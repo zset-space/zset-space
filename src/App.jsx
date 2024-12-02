@@ -24,6 +24,7 @@ const UltrasphereViz = () => {
     // Special dimension handling
     const isNearE = Math.abs(dimension - Math.E) < 0.015;
     const isNearPhi = Math.abs(dimension - 1.618033988749895) < 0.015;
+    // Pretty sure this is a black hole
     const isNearTau = Math.abs(dimension - 2 * Math.PI) < 0.015;
 
     if (isNearE || isNearPhi || isNearTau) {
