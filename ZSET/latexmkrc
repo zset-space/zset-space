@@ -1,0 +1,7 @@
+#!/usr/bin/env perl
+
+use warnings FATAL => 'all';
+
+# Local texmf.
+$ENV{TEXMFHOME} = "$ENV{PWD}/_texmf:".($ENV{TEXMFHOME}//"");
+$ENV{BSTINPUTS} = "$ENV{PWD}/_texmf/bibtex/bst//:".($ENV{BSTINPUTS}//"");
