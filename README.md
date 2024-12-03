@@ -10,7 +10,7 @@ ZSET identifies a mathematical object that manifests simultaneously as point, li
 
 #### Why start with zero and an imaginary circle?
 
-The most fundamental geometric objects are a point (represented by zero) and, in ZSET, a complex circle. These aren't chosen arbitrarily, they're the first two spheres of _dimensions_ zero and one, bound together in such a way that the projective line connecting the real zero and imaginary unit circle is now _graded_, and maintains a consistent internal perspective at all scales. Zero provides absolute position, while the imaginary circle provides phase offsets and extension. Together in $G_0$, they form the minimal structure needed for coherent geometric transitions while preserving geometric relationships.
+The most fundamental geometric objects are a point (represented by zero) and, in ZSET, a complex circle. These aren't chosen arbitrarily, they're the first two spheres of _dimensions_ zero and one, bound together in such a way that the projective line connecting the real zero and imaginary unit circle is now _graded_, and maintains a consistent internal perspective at all scales. Zero provides absolute position, while the imaginary circle provides phase offsets and extension. Together in <math><msub><mi>G</mi><mn>0</mn></msub></math>, they form the minimal structure needed for coherent geometric transitions while preserving geometric relationships.
 
 #### How did the framework's development begin?
 
@@ -18,11 +18,11 @@ The gamma function's ability to smoothly interpolate between dimensions provided
 
 #### How does stereographic projection unite these objects?
 
-Stereographic projection provides a natural mapping between real and imaginary domains. This specific projection is crucial because it preserves angles (it's conformal) while connecting finite and infinite domains - a property essential for maintaining geometric relationships during transitions. When projecting through zero, we create a smooth connection between the point and the circle at infinity, unifying them into a single geometric object that can manifest as either. This conformal preservation ensures that geometric relationships remain consistent across all manifestations of $G_0$.
+Stereographic projection provides a natural mapping between real and imaginary domains. This specific projection is crucial because it preserves angles (it's conformal) while connecting finite and infinite domains - a property essential for maintaining geometric relationships during transitions. When projecting through zero, we create a smooth connection between the point and the circle at infinity, unifying them into a single geometric object that can manifest as either. This conformal preservation ensures that geometric relationships remain consistent across all manifestations of <math><msub><mi>G</mi><mn>0</mn></msub></math>.
 
-#### Why is $G_0$'s structure so fundamental?
+#### Why is <math><msub><mi>G</mi><mn>0</mn></msub></math>'s structure so fundamental?
 
-The enhanced point space $G_0$ binds together zero and the imaginary circle through stereographic projection. This creates a unified object that can manifest both point-like and extended behaviors without requiring additional postulates. The line at infinity emerges naturally from this construction, providing a more intuitive way to understand extended behavior - it's simply how our unified object appears when viewed through its extended aspect. This dual nature is not a mathematical convenience but a necessary consequence of maintaining geometric consistency.
+The enhanced point space <math><msub><mi>G</mi><mn>0</mn></msub></math> binds together zero and the imaginary circle through stereographic projection. This creates a unified object that can manifest both point-like and extended behaviors without requiring additional postulates. The line at infinity emerges naturally from this construction, providing a more intuitive way to understand extended behavior - it's simply how our unified object appears when viewed through its extended aspect. This dual nature is not a mathematical convenience but a necessary consequence of maintaining geometric consistency.
 
 #### How do dimensional transitions preserve geometric relationships?
 
@@ -30,7 +30,7 @@ The framework's dimensional evolution function φ(d) ensures smooth transitions 
 
 #### Why must dimensions share rotational space?
 
-When we add dimensions to $G_0$, we're not just adding free space - we're adding dimensions that must maintain coherent rotational relationships with existing ones. This is similar to how root systems in mathematics require specific angular relationships between vectors. Each new dimension must align its rotational parameters with existing ones, creating the appearance of continuous space and enabling smooth geometric transitions. This forced alignment is what allows coherent movement through space.
+When we add dimensions to <math><msub><mi>G</mi><mn>0</mn></msub></math>, we're not just adding free space - we're adding dimensions that must maintain coherent rotational relationships with existing ones. This is similar to how root systems in mathematics require specific angular relationships between vectors. Each new dimension must align its rotational parameters with existing ones, creating the appearance of continuous space and enabling smooth geometric transitions. This forced alignment is what allows coherent movement through space.
 
 #### How does phase space become constrained with additional dimensions?
 
@@ -48,14 +48,14 @@ The framework suggests that forced alignment of rotational parameters could mani
 
 This geometric perspective offers a novel way to understand gravitational phenomena, though these connections remain to be fully mathematically developed.
 
-#### How does $G_0$'s structure generate quantum behavior?
+#### How does <math><msub><mi>G</mi><mn>0</mn></msub></math>'s structure generate quantum behavior?
 
 Quantum phenomena emerge naturally from maintaining geometric consistency during dimensional transitions:
 
 - Uncertainty principles arise from phase space sharing constraints
 - Wave-like behavior emerges from the line at infinity
 - Entanglement reflects shared phase parameters
-- Measurement effects represent transitions between different geometric manifestations of $G_0$
+- Measurement effects represent transitions between different geometric manifestations of <math><msub><mi>G</mi><mn>0</mn></msub></math>
 - Phase coherence comes from rotational alignment requirements
 
 #### What experimental signatures would validate this framework?
@@ -67,13 +67,13 @@ ZSET predicts specific modifications to:
 - Interference patterns with geometric corrections
 - Phase relationship preservation mechanisms
 
-These predictions emerge directly from $G_0$'s geometric structure rather than being imposed externally.
+These predictions emerge directly from <math><msub><mi>G</mi><mn>0</mn></msub></math>'s geometric structure rather than being imposed externally.
 
 #### How does ZSET unify classical and quantum behaviors?
 
 The framework demonstrates that quantum mechanics isn't separate from classical physics - it's what happens when you maintain geometric consistency across dimensional transitions. This unifies:
 
-- Point and extended behaviors through $G_0$'s structure
+- Point and extended behaviors through <math><msub><mi>G</mi><mn>0</mn></msub></math>'s structure
 - Real and imaginary domains via conformal stereographic projection
 - Discrete and continuous properties through phase space sharing
 - Forces and geometry through phase space exhaustion
@@ -82,7 +82,7 @@ The framework demonstrates that quantum mechanics isn't separate from classical 
 
 The framework's power comes from its:
 
-- Minimal structure ($G_0$ as fundamental building block)
+- Minimal structure (<math><msub><mi>G</mi><mn>0</mn></msub></math> as fundamental building block)
 - Natural transitions (smooth mappings between manifestations through conformal projection)
 - Geometric necessity (quantum behavior emerging from consistency requirements)
 - Unified description (single framework encompassing multiple phenomena)
