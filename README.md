@@ -131,4 +131,6 @@ Work addresses:
 
 ZSET shows quantum mechanics as the mathematical description of dimensional transitions. Quantum mechanical features arise from maintaining consistent geometric descriptions across reference frames. The framework derives quantum behavior from geometry while preserving classical physics in appropriate limits.
 
-[Project Website](https://zset.space) | [Source Code](https://github.com/zset-space/zset-space)
+* [Additional Source Code](https://github.com/zset-space/zset-space)
+* [Mathematical Framework](https://zset.space/ZSET.pdf)
+* [Project Website](https://zset.space)
