@@ -16,7 +16,7 @@ The most fundamental geometric objects are a point (represented by zero) and, in
 
 #### How did the framework's development begin?
 
-The gamma function's ability to smoothly interpolate between dimensions provided the initial inspiration for ZSET. This connection suggested a natural way to understand dimensional transitions, leading to the development of the phase factor φ(d) = 2π/(d(d+1)) that governs dimensional evolution in the framework. While morphic numbers and other special values may suggest additional mathematical connections, these represent potential avenues for future development rather than current results of the framework.
+The gamma function's ability to smoothly interpolate between dimensions provided the initial inspiration for ZSET. This connection suggested a natural way to understand dimensional transitions, leading to the development of the phase factor φ(d) = 2π/(d(d+1)) that governs dimensional evolution in the framework. Fractal dimensions matching morphic numbers or other special values suggests additional mathematical connections and represents potential avenues for future development rather than current results of the framework.
 
 #### How does stereographic projection unite these objects?
 
