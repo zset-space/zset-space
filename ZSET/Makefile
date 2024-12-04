@@ -71,11 +71,8 @@ $(bldmark): $(srcs) $(bldpngs) $(MAKEFILE_LIST) $(bldrtfm); $(htmlc)
 # Group targets.
 build: $(bldrtfm) $(bldmark) $(bldpdfs)
 
-# Group tests.
-t test check: build; @echo 'TODO($<): $@'
-
 # Install products.
-install: build test; $(install) -p -m 0644 $(bldpngs) $(bldrtfm) $(bldmark) $(bldpdfs) $(or $(DESTDIR),.)
+install: build; $(install) -p -m 0644 $(bldpngs) $(bldrtfm) $(bldmark) $(bldpdfs) $(or $(DESTDIR),.)
 
 # View products.
 openpdfs open: $(bldpdfs); $(open) $^
@@ -90,5 +87,5 @@ cleantmp cleanone cleanpngs cleanpdfs cleanmark cleanrtfm cleanall: clean%: ; $(
 .DEFAULT_GOAL := install
 
 # Non-file targets.
-.PHONY: install build t test check open openpngs openpdfs openall \
+.PHONY: install build check open openpngs openpdfs openall \
 	clean cleantmp cleanone cleanpngs cleanpdfs cleanmark cleanrtfm cleanall
