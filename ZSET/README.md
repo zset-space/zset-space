@@ -237,50 +237,48 @@ embeddings:
 where the phase factor $`\phi(d)`$ arises directly from geometric
 consistency requirements.
 
-This twisted product structure proves essential rather than merely
-convenient, as it directly generates quantum behavior through phase
-relationships. The phase factor $`\phi(d)`$ emerges through analysis of
-dimensional transitions, where each embedding contributes a phase to
-maintain geometric consistency:
+The twisted product structure generates quantum behavior through
+systematic phase relationships. Each dimensional embedding contributes a
+specific phase factor $`\phi(d)`$ that maintains geometric consistency:
 ``` math
 \phi(d) = \frac{2\pi}{d(d+1)}
 ```
-demonstrating how quantum phase relationships arise from geometric
-structure. This phase accumulation mechanism demonstrates how quantum
-interference and statistical behavior emerge from $`G_0`$’s topology
-rather than being imposed externally. Consider a example of phase
-accumulation through three-dimensional embedding. Starting from d=1, we
-have:
 
+Dimensional contributions partition phase freedom through a convergent
+series:
 ``` math
 \begin{aligned}
 \phi(1) &= \frac{2\pi}{1(1+1)} = \pi \\
 \phi(2) &= \frac{2\pi}{2(2+1)} = \frac{\pi}{3} \\
-\phi(3) &= \frac{2\pi}{3(3+1)} = \frac{\pi}{6}
+\phi(3) &= \frac{2\pi}{3(3+1)} = \frac{\pi}{6} \\
+\phi(4) &= \frac{2\pi}{4(4+1)} = \frac{\pi}{10} \\
+&\vdots
 \end{aligned}
 ```
 
-The total accumulated phase is:
+Phase factors sum to one complete turn through infinite-dimensional
+embedding:
 ``` math
-\phi(3)_{\text{total}} = \pi + \frac{\pi}{3} + \frac{\pi}{6} = \frac{9\pi}{6} = \frac{3\pi}{2}
+\phi(d)_{\text{total}} = \sum_{i=1}^{\infty} \phi(i) = 2\pi
 ```
 
-This demonstrates how each dimensional embedding contributes a phase
-factor while maintaining geometric consistency through the recursive
-structure. The recursive nature of phase generation through dimensional
-embeddings reveals how geometric structure directly accommodates quantum
-phenomena.
+This structure demonstrates the fundamental relationship between
+dimensional embedding and phase freedom in $`G_0`$. At $`z = 0`$, the
+infinite-dimensional limit reflects complete phase freedom and lack of
+dimensional constraints, whereas finite partial sums correspond to
+restricted phase relationships. The recursive generation of phases
+through dimensional embedding reveals how $`G_0`$’s geometric structure
+systematically accommodates quantum phenomena without external
+imposition.
 
-This recursive structure ensures that the total accumulated phase
-remains coherent across dimensional embeddings, satisfying:
-``` math
-\phi(d)_{\text{total}} = \sum_{i=1}^d \phi(i) = 2\pi
-```
-thereby preserving the property of phase closure. This coherence emerges
-as a direct consequence of $`G_0`$’s topology, where the twisted product
-operation aligns phase accumulation with geometric relationships. Such
-coherence is foundational to phenomena like interference and quantum
-statistics.
+The twisted product operation aligns phase accumulation with geometric
+relationships, generating coherence through the enhanced measure
+$`\omega_q`$. This measure captures both the local phase structure and
+its dimensional evolution, establishing how quantum behavior emerges
+directly from $`G_0`$’s topology. Such geometric coherence provides the
+foundation for quantum interference and statistical behavior, while
+ensuring consistency with the categorical framework’s composition
+properties.
 
 The twisted product structure generates quantum behavior through
 geometric evolution rather than external imposition. The phase factor
