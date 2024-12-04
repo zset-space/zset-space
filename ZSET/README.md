@@ -70,9 +70,9 @@ total accumulated phase across transitions satisfies:
 \phi(d)_{\text{total}} = \sum_{i=1}^d \phi(i) = 2\pi
 ```
 
-This recursive summation reflects the role of dimensional embeddings in
-maintaining geometric coherence. The twisted product structure must
-satisfy the regularity condition:
+This recursive-telescopic summation reflects the role of dimensional
+embeddings in maintaining geometric coherence. The twisted product
+structure must satisfy the regularity condition:
 ``` math
 \|\nabla(z_1 \otimes z_2)\| \leq C(\|z_1\| + \|z_2\|)
 ```
@@ -1113,8 +1113,8 @@ ensuring geometric coherence across transitions.
 
 This geometric structure reflects a principle: quantum mechanics is not
 imposed externally but emerges intrinsically from $`G_0`$’s topology and
-symmetries. The recursive summation of phase factors maintains coherence
-through:
+symmetries. The recursive-telescopic summation of phase factors
+maintains coherence through:
 ``` math
 \phi(d)_{\text{total}} = \sum_{i=1}^d \phi(i) = 2\pi
 ```
