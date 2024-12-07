@@ -3,14 +3,14 @@
  <title>hypersphere volume and surface area graphs</title>
  <desc>Graphs of volumes and surface areas of n-spheres of radius 1 by CMG Lee. The apparent intersection is an artifact of the differing scales. In the SVG file, hover over a point to see its decimal value.</desc>
  <style type="text/css">
-  #main { font-family:Helvetica,Arial,sans-serif; font-size:20px; text-anchor:middle;
+  #main { font-family:Helvetica,Arial,sans-serif; font-size:12px; text-anchor:middle;
           stroke-linejoin:round; stroke:none; fill:none; }
   #main:hover            { stroke-opacity:0.2; fill-opacity:0.2; }
   .nofade, .active:hover { stroke-opacity:1;   fill-opacity:1;   }
   text      { cursor:default; }
   .pi       { font-family:Times,Times New Roman,serif; }
-  .sup      { font-size:6px; }
-  .bold     { font-size:12px; font-weight:bold; }
+  .sup      { font-size:4px; }
+  .bold     { font-size:8px; font-weight:bold; }
   .stroke_v { stroke:#cc00ff; }
   .stroke_s { stroke:#0000cc; }
   .fill_v   {   fill:#cc00ff; }
@@ -21,11 +21,11 @@
    <stop offset="10%" stop-color="#000000"/>
    <stop offset="90%" stop-color="#666666"/>
   </radialGradient>
-  <pattern id="pattern_grid_1" patternUnits="userSpaceOnUse" width="10" height="5">
-   <rect x="0" y="0" width="9999" height="9999" stroke-opacity="0.2" stroke="#ffffff" fill="none"/>
+  <pattern id="pattern_grid_1" patternUnits="userSpaceOnUse" width="5" height="5">
+   <rect x="0" y="0" width="9999" height="9999" stroke-opacity="0.1" stroke="#ffffff" fill="none"/>
   </pattern>
-  <pattern id="pattern_grid_5" patternUnits="userSpaceOnUse" width="50" height="25">
-   <rect x="0" y="0" width="9999" height="9999" stroke-opacity="0.3" stroke="#ffffff" fill="url(#pattern_grid_1)"/>
+  <pattern id="pattern_grid_5" patternUnits="userSpaceOnUse" width="25" height="25">
+   <rect x="0" y="0" width="9999" height="9999" stroke-opacity="0.2" stroke="#ffffff" fill="url(#pattern_grid_1)"/>
   </pattern>
   <circle id="marker_v" cx="0" cy="0" r="2" stroke="none"/>
   <circle id="marker_s" cx="0" cy="0" r="2" stroke="#0000cc" fill="none"/>
@@ -40,97 +40,97 @@
     <path d="M50,12.8 V-131.595 H0" stroke-width="0.5"/>
    </g>
    <g class="active" transform="translate(0,-25)" stroke="#000000">
-    <text id="label_v_0" transform="translate(-3,-3)" x="0" y="0" font-size="10" stroke-width="2"><tspan>1</tspan></text>
+    <text id="label_v_0" transform="translate(-3,-3)" x="0" y="0" font-size="6" stroke-width="2"><tspan>1</tspan></text>
     <use xlink:href="#label_v_0" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(0) = 1</title>
    </g>
    <g class="active" transform="translate(10,-50)" stroke="#000000">
-    <text id="label_v_1" transform="translate(-3,-3)" x="0" y="0" font-size="10" stroke-width="2"><tspan>2</tspan></text>
+    <text id="label_v_1" transform="translate(-3,-3)" x="0" y="0" font-size="6" stroke-width="2"><tspan>2</tspan></text>
     <use xlink:href="#label_v_1" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(1) = 2</title>
    </g>
    <g class="active" transform="translate(20,-78.540)" stroke="#000000">
-    <text id="label_v_2" transform="translate(-6,-3)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan></text>
+    <text id="label_v_2" transform="translate(-6,-3)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan></text>
     <use xlink:href="#label_v_2" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(2) ~ 3.1415926536</title>
    </g>
    <g class="active" transform="translate(30,-104.720)" stroke="#000000">
-    <text id="label_v_3" transform="translate(-9,-3)" x="0" y="0" font-size="10" stroke-width="2"><tspan>4</tspan><tspan class="pi">&#960;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">3</tspan></text>
+    <text id="label_v_3" transform="translate(-9,-3)" x="0" y="0" font-size="6" stroke-width="2"><tspan>4</tspan><tspan class="pi">&#960;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">3</tspan></text>
     <use xlink:href="#label_v_3" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(3) ~ 4.1887902048</title>
    </g>
    <g class="active" transform="translate(40,-123.370)" stroke="#000000">
-    <text id="label_v_4" transform="translate(-9,-6)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">2</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">2</tspan></text>
+    <text id="label_v_4" transform="translate(-9,-6)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">2</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">2</tspan></text>
     <use xlink:href="#label_v_4" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(4) ~ 4.9348022005</title>
    </g>
    <g class="active" transform="translate(50,-131.595)" stroke="#000000">
-    <text id="label_v_5" class="bold" transform="translate(-6,-15)" x="0" y="0" font-size="10" stroke-width="2"><tspan>8</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">2</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">15</tspan></text>
+    <text id="label_v_5" class="bold" transform="translate(-6,-15)" x="0" y="0" font-size="6" stroke-width="2"><tspan>8</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">2</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">15</tspan></text>
     <use xlink:href="#label_v_5" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(5) ~ 5.2637890139</title>
    </g>
    <g class="active" transform="translate(60,-129.193)" stroke="#000000">
-    <text id="label_v_6" transform="translate(3,-12)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">3</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">6</tspan></text>
+    <text id="label_v_6" transform="translate(3,-12)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">3</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">6</tspan></text>
     <use xlink:href="#label_v_6" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(6) ~ 5.16771278</title>
    </g>
    <g class="active" transform="translate(70,-118.119)" stroke="#000000">
-    <text id="label_v_7" transform="translate(12,-6)" x="0" y="0" font-size="10" stroke-width="2"><tspan>16</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">3</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">105</tspan></text>
+    <text id="label_v_7" transform="translate(12,-6)" x="0" y="0" font-size="6" stroke-width="2"><tspan>16</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">3</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">105</tspan></text>
     <use xlink:href="#label_v_7" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(7) ~ 4.7247659703</title>
    </g>
    <g class="active" transform="translate(80,-101.468)" stroke="#000000">
-    <text id="label_v_8" transform="translate(12,-3)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">4</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">24</tspan></text>
+    <text id="label_v_8" transform="translate(12,-3)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">4</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">24</tspan></text>
     <use xlink:href="#label_v_8" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(8) ~ 4.0587121264</title>
    </g>
    <g class="active" transform="translate(90,-82.463)" stroke="#000000">
-    <text id="label_v_9" transform="translate(-9,12)" x="0" y="0" font-size="10" stroke-width="2"><tspan>32</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">4</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">945</tspan></text>
+    <text id="label_v_9" transform="translate(-9,12)" x="0" y="0" font-size="6" stroke-width="2"><tspan>32</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">4</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">945</tspan></text>
     <use xlink:href="#label_v_9" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(9) ~ 3.2985089027</title>
    </g>
    <g class="active" transform="translate(100,-63.754)" stroke="#000000">
-    <text id="label_v_10" transform="translate(9,-9)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">5</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">120</tspan></text>
+    <text id="label_v_10" transform="translate(9,-9)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">5</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">120</tspan></text>
     <use xlink:href="#label_v_10" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(10) ~ 2.5501640399</title>
    </g>
    <g class="active" transform="translate(110,-47.103)" stroke="#000000">
-    <text id="label_v_11" transform="translate(-15,3)" x="0" y="0" font-size="10" stroke-width="2"><tspan>64</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">5</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">_____</tspan><tspan x="0" dy="1em">10395</tspan></text>
+    <text id="label_v_11" transform="translate(-15,3)" x="0" y="0" font-size="6" stroke-width="2"><tspan>64</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">5</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">_____</tspan><tspan x="0" dy="1em">10395</tspan></text>
     <use xlink:href="#label_v_11" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(11) ~ 1.8841038794</title>
    </g>
    <g class="active" transform="translate(120,-33.382)" stroke="#000000">
-    <text id="label_v_12" transform="translate(6,-12)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">6</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">720</tspan></text>
+    <text id="label_v_12" transform="translate(6,-12)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">6</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">720</tspan></text>
     <use xlink:href="#label_v_12" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(12) ~ 1.3352627689</title>
    </g>
    <g class="active" transform="translate(130,-22.766)" stroke="#000000">
-    <text id="label_v_13" transform="translate(-18,6)" x="0" y="0" font-size="10" stroke-width="2"><tspan>128</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">6</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">______</tspan><tspan x="0" dy="1em">135135</tspan></text>
+    <text id="label_v_13" transform="translate(-18,6)" x="0" y="0" font-size="6" stroke-width="2"><tspan>128</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">6</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">______</tspan><tspan x="0" dy="1em">135135</tspan></text>
     <use xlink:href="#label_v_13" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(13) ~ 0.9106287548</title>
    </g>
    <g class="active" transform="translate(140,-14.982)" stroke="#000000">
-    <text id="label_v_14" transform="translate(-3,12)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">7</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">____</tspan><tspan x="0" dy="1em">5040</tspan></text>
+    <text id="label_v_14" transform="translate(-3,12)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">7</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">____</tspan><tspan x="0" dy="1em">5040</tspan></text>
     <use xlink:href="#label_v_14" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(14) ~ 0.5992645293</title>
    </g>
    <g class="active" transform="translate(150,-9.536)" stroke="#000000">
-    <text id="label_v_15" transform="translate(18,0)" x="0" y="0" font-size="10" stroke-width="2"><tspan>256</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">7</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">______</tspan><tspan x="0" dy="1em">2027025</tspan></text>
+    <text id="label_v_15" transform="translate(18,0)" x="0" y="0" font-size="6" stroke-width="2"><tspan>256</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">7</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">______</tspan><tspan x="0" dy="1em">2027025</tspan></text>
     <use xlink:href="#label_v_15" stroke="none"/>
     <use xlink:href="#marker_v"/>
     <title>V(15) ~ 0.3814432808</title>
@@ -142,97 +142,97 @@
     <path d="M70,12.8 V-165.367 H150" stroke-width="0.5"/>
    </g>
    <g class="active" transform="translate(0,0)" stroke="#000000">
-    <text id="label_s_0" transform="translate(-3,-3)" x="0" y="0" font-size="10" stroke-width="2"><tspan>0</tspan></text>
+    <text id="label_s_0" transform="translate(-3,-3)" x="0" y="0" font-size="6" stroke-width="2"><tspan>0</tspan></text>
     <use xlink:href="#label_s_0" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(-1) = 0</title>
    </g>
    <g class="active" transform="translate(10,-10)" stroke="#000000">
-    <text id="label_s_1" transform="translate(6,6)" x="0" y="0" font-size="10" stroke-width="2"><tspan>2</tspan></text>
+    <text id="label_s_1" transform="translate(6,6)" x="0" y="0" font-size="6" stroke-width="2"><tspan>2</tspan></text>
     <use xlink:href="#label_s_1" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(0) = 2</title>
    </g>
    <g class="active" transform="translate(20,-31.416)" stroke="#000000">
-    <text id="label_s_2" transform="translate(9,6)" x="0" y="0" font-size="10" stroke-width="2"><tspan>2</tspan><tspan class="pi">&#960;</tspan></text>
+    <text id="label_s_2" transform="translate(9,6)" x="0" y="0" font-size="6" stroke-width="2"><tspan>2</tspan><tspan class="pi">&#960;</tspan></text>
     <use xlink:href="#label_s_2" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(1) ~ 6.2831853072</title>
    </g>
    <g class="active" transform="translate(30,-62.832)" stroke="#000000">
-    <text id="label_s_3" transform="translate(9,6)" x="0" y="0" font-size="10" stroke-width="2"><tspan>4</tspan><tspan class="pi">&#960;</tspan></text>
+    <text id="label_s_3" transform="translate(9,6)" x="0" y="0" font-size="6" stroke-width="2"><tspan>4</tspan><tspan class="pi">&#960;</tspan></text>
     <use xlink:href="#label_s_3" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(2) ~ 12.5663706144</title>
    </g>
    <g class="active" transform="translate(40,-98.696)" stroke="#000000">
-    <text id="label_s_4" transform="translate(9,9)" x="0" y="0" font-size="10" stroke-width="2"><tspan>2</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">2</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan></text>
+    <text id="label_s_4" transform="translate(9,9)" x="0" y="0" font-size="6" stroke-width="2"><tspan>2</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">2</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan></text>
     <use xlink:href="#label_s_4" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(3) ~ 19.7392088022</title>
    </g>
    <g class="active" transform="translate(50,-131.595)" stroke="#000000">
-    <text id="label_s_5" transform="translate(6,15)" x="0" y="0" font-size="10" stroke-width="2"><tspan>8</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">2</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">3</tspan></text>
+    <text id="label_s_5" transform="translate(6,15)" x="0" y="0" font-size="6" stroke-width="2"><tspan>8</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">2</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">3</tspan></text>
     <use xlink:href="#label_s_5" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(4) ~ 26.3189450696</title>
    </g>
    <g class="active" transform="translate(60,-155.031)" stroke="#000000">
-    <text id="label_s_6" transform="translate(-3,-3)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">3</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan></text>
+    <text id="label_s_6" transform="translate(-3,-3)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">3</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan></text>
     <use xlink:href="#label_s_6" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(5) ~ 31.0062766803</title>
    </g>
    <g class="active" transform="translate(70,-165.367)" stroke="#000000">
-    <text id="label_s_7" class="bold" transform="translate(-9,-15)" x="0" y="0" font-size="10" stroke-width="2"><tspan>16</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">3</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">15</tspan></text>
+    <text id="label_s_7" class="bold" transform="translate(-9,-15)" x="0" y="0" font-size="6" stroke-width="2"><tspan>16</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">3</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">15</tspan></text>
     <use xlink:href="#label_s_7" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(6) ~ 33.0733617923</title>
    </g>
    <g class="active" transform="translate(80,-162.348)" stroke="#000000">
-    <text id="label_s_8" transform="translate(3,-15)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">4</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">3</tspan></text>
+    <text id="label_s_8" transform="translate(3,-15)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">4</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">3</tspan></text>
     <use xlink:href="#label_s_8" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(7) ~ 32.4696970113</title>
    </g>
    <g class="active" transform="translate(90,-148.433)" stroke="#000000">
-    <text id="label_s_9" transform="translate(12,-6)" x="0" y="0" font-size="10" stroke-width="2"><tspan>32</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">4</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">105</tspan></text>
+    <text id="label_s_9" transform="translate(12,-6)" x="0" y="0" font-size="6" stroke-width="2"><tspan>32</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">4</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">105</tspan></text>
     <use xlink:href="#label_s_9" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(8) ~ 29.6865801246</title>
    </g>
    <g class="active" transform="translate(100,-127.508)" stroke="#000000">
-    <text id="label_s_10" transform="translate(9,-6)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">5</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">12</tspan></text>
+    <text id="label_s_10" transform="translate(9,-6)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">5</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">12</tspan></text>
     <use xlink:href="#label_s_10" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(9) ~ 25.5016403988</title>
    </g>
    <g class="active" transform="translate(110,-103.626)" stroke="#000000">
-    <text id="label_s_11" transform="translate(12,-9)" x="0" y="0" font-size="10" stroke-width="2"><tspan>64</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">5</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">945</tspan></text>
+    <text id="label_s_11" transform="translate(12,-9)" x="0" y="0" font-size="6" stroke-width="2"><tspan>64</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">5</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">945</tspan></text>
     <use xlink:href="#label_s_11" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(10) ~ 20.7251426733</title>
    </g>
    <g class="active" transform="translate(120,-80.116)" stroke="#000000">
-    <text id="label_s_12" transform="translate(9,-12)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">6</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">60</tspan></text>
+    <text id="label_s_12" transform="translate(9,-12)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">6</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">__</tspan><tspan x="0" dy="1em">60</tspan></text>
     <use xlink:href="#label_s_12" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(11) ~ 16.0231532263</title>
    </g>
    <g class="active" transform="translate(130,-59.191)" stroke="#000000">
-    <text id="label_s_13" transform="translate(12,-12)" x="0" y="0" font-size="10" stroke-width="2"><tspan>128</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">6</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">_____</tspan><tspan x="0" dy="1em">10395</tspan></text>
+    <text id="label_s_13" transform="translate(12,-12)" x="0" y="0" font-size="6" stroke-width="2"><tspan>128</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">6</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">_____</tspan><tspan x="0" dy="1em">10395</tspan></text>
     <use xlink:href="#label_s_13" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(12) ~ 11.8381738122</title>
    </g>
    <g class="active" transform="translate(140,-41.949)" stroke="#000000">
-    <text id="label_s_14" transform="translate(12,-9)" x="0" y="0" font-size="10" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">7</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">360</tspan></text>
+    <text id="label_s_14" transform="translate(12,-9)" x="0" y="0" font-size="6" stroke-width="2"><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">7</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">___</tspan><tspan x="0" dy="1em">360</tspan></text>
     <use xlink:href="#label_s_14" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(13) ~ 8.3897034105</title>
    </g>
    <g class="active" transform="translate(150,-28.608)" stroke="#000000">
-    <text id="label_s_15" transform="translate(18,-3)" x="0" y="0" font-size="10" stroke-width="2"><tspan>256</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">7</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">______</tspan><tspan x="0" dy="1em">135135</tspan></text>
+    <text id="label_s_15" transform="translate(18,-3)" x="0" y="0" font-size="6" stroke-width="2"><tspan>256</tspan><tspan class="pi">&#960;</tspan><tspan class="sup" dy="-1ex">7</tspan><tspan class="sup" x="0" dy="1ex">&#160;</tspan><tspan x="0">______</tspan><tspan x="0" dy="1em">135135</tspan></text>
     <use xlink:href="#label_s_15" stroke="none"/>
     <use xlink:href="#marker_s"/>
     <title>S(14) ~ 5.7216492123</title>
@@ -248,27 +248,6 @@
    <text x="70"  y="0.7ex" class="stroke_s">7</text>
    <text x="100" y="0.7ex">10</text>
    <text x="150" y="0.7ex">15</text>
-   <text x="175" y="0.7ex" font-style="italic">n</text>
-  </g>
-  <g transform="translate(-11,0)" class="fill_v">
-   <text x="0" y="0"    dy="0.7ex">0</text>
-   <text x="0" y="-25"  dy="0.7ex">1</text>
-   <text x="0" y="-50"  dy="0.7ex">2</text>
-   <text x="0" y="-75"  dy="0.7ex">3</text>
-   <text x="0" y="-100" dy="0.7ex">4</text>
-   <text x="0" y="-125" dy="0.7ex">5</text>
-   <text x="0" y="-150" dy="0.7ex">6</text>
-   <text x="0" y="-180" dy="0.7ex" font-style="italic"><tspan>V</tspan><tspan dx="-0.5ex" dy="1ex" font-size="12">n</tspan></text>
-  </g>
-  <g transform="translate(195,0)" class="fill_s">
-   <text x="0"  y="0"    dy="0.7ex">0</text>
-   <text x="0"  y="-25"  dy="0.7ex">5</text>
-   <text x="0"  y="-50"  dy="0.7ex">10</text>
-   <text x="0"  y="-75"  dy="0.7ex">15</text>
-   <text x="0"  y="-100" dy="0.7ex">20</text>
-   <text x="0"  y="-125" dy="0.7ex">25</text>
-   <text x="0"  y="-150" dy="0.7ex">30</text>
-   <text x="-5" y="-180" dy="0.7ex" font-style="italic"><tspan>S</tspan><tspan dy="1ex" font-size="12">n</tspan><tspan dx="0.2ex" font-style="normal" font-size="12">-1</tspan></text>
   </g>
   <g transform="translate(0,7)" fill="#ffffff">
    <circle cx="0"  cy="0" r="1"/>
@@ -313,7 +292,7 @@ def try_int_float(field):
   except: return field
 
 graphs = [
- ['v',25,None ,lambda n:pi**(n*0.5)  /gamma(n*0.5+1),[-1,-1,-2,-3,-3, -2, 1, 4, 4,-3,  3,-5, 2,-6,-1, 6],
+ ['v', 5,None ,lambda n:pi**(n*0.5)  /gamma(n*0.5+1),[-1,-1,-2,-3,-3, -2, 1, 4, 4,-3,  3,-5, 2,-6,-1, 6],
                                                      [-1,-1,-1,-1,-2, -5,-4,-2,-1, 4, -3, 1,-4, 2, 4, 0]],
  ['s', 5,'8,3',lambda n:pi**(n*0.5)*2/gamma(n*0.5  ),[-1, 2, 3, 3, 3,  2,-1,-3, 1, 4,  3, 4, 3, 4, 4, 6],
                                                      [-1, 2, 2, 2, 3,  5,-1,-5,-5,-2, -2,-3,-4,-4,-3,-1]],
@@ -358,7 +337,7 @@ for graph in graphs:
    out_class          = ''' class="bold"''' if (x == x_int_n_max) else ''
    append(out_markers, r'''\
    <g class="active" transform="translate({out_xy})" stroke="#000000">
-    <text id="label_{id}_{n}"{out_class} transform="translate({x_label},{y_label})" x="0" y="0" font-size="10" stroke-width="2">{''.join(out_labels)}</text>
+    <text id="label_{id}_{n}"{out_class} transform="translate({x_label},{y_label})" x="0" y="0" font-size="6" stroke-width="2">{''.join(out_labels)}</text>
     <use xlink:href="#label_{id}_{n}" stroke="none"/>
     <use xlink:href="#marker_{id}"/>
     <title>{id.upper()}({n - 1 if (id == 's') else n}) {'~' if (n > 1) else '='} {re.sub(r'\.?0+$', '', ('%.10f' % (value)))}</title>
