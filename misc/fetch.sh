@@ -2,12 +2,16 @@
 
 set -euo pipefail
 
+: ${URL=https://en.wikipedia.org/w/index.php?action=raw&title=}
+
 say() { echo -e "\e[1;32m$@\e[0m"; } >&2
 err() { echo -e "\e[1;31m$@\e[0m"; } >&2
+sep() { echo -e "\n<!-- $1 $2 -->"; }
+get() { curl -s "$URL$1" | sed '/^==Notes==$/,/\Z/d'; }
 
 for title in "$@"; do
-    printf -v url 'https://en.wikipedia.org/w/index.php?action=raw&title=%s' "$title"
-    printf "\n<!-- START %s -->\n" "$url"
-    say "GET $url" && curl -s "$url"
-    printf "\n<!-- END %s -->\n" "$url"
+    say "GET $1"
+    sep "$title" start
+    get "$title" || err "$title"
+    sep "$title" done
 done
