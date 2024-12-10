@@ -12,8 +12,8 @@ get() {
     sep START "$1"
     curl -s "$URL$1" \
         | sed -r '/^ *== *(Notes|References|Citations) *== *$/,$d' \
-        | pandoc -f mediawiki+auto_identifiers -t gfm --wrap=preserve \
-        | sed -r '/^\[\^[0-9]+\]:/{N;d;};s, +$,,g' \
+        | pandoc -f mediawiki -t gfm --wrap=preserve --lua-filter=${0/%\.sh/.lua} \
+        | sed -r '/^\[\^[0-9]+\]:/{N;d;};s,\[\^[0-9]+\],,g;s, +$,,g' \
         || err "$title"
     sep DONE "$1"
 }
