@@ -10,9 +10,10 @@ sep() { echo -e "\n<!-- $* -->"; }
 get() {
     say GET "$1"
     sep START "$1"
-    curl "$URL$1" \
+    curl -s "$URL$1" \
         | sed -r '/^ *== *(Notes|References|Citations) *== *$/,$d' \
-        | pandoc -f mediawiki -t gfm --wrap=preserve \
+        | pandoc -f mediawiki+auto_identifiers -t gfm --wrap=preserve \
+        | sed -r '/^\[\^[0-9]+\]:/{N;d;};s, +$,,g' \
         || err "$title"
     sep DONE "$1"
 }
