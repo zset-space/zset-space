@@ -10,7 +10,7 @@ sep() { echo -e "\n<!-- $1 $2 -->"; }
 get() { curl -s "$URL$1" | sed '/^==Notes==$/,/\Z/d'; }
 
 for title in "$@"; do
-    say "GET $1"
+    say "GET $title"
     sep "$title" start
     get "$title" || err "$title"
     sep "$title" done
