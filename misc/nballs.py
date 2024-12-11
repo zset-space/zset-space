@@ -627,6 +627,24 @@ class NBallAnalyzer:
         coupling = abs(s_d1) / (tau * abs(v_d))
         return coupling * np.exp(-((phase_diff - pi / 2) ** 2) / (2 * pi))
 
+    def phase_velocity(self, d, delta=0.001):
+        """Compute phase velocity and acceleration at dimension d"""
+        # Get phases at d±delta
+        v_minus = self.ball_volume(d - delta)
+        v_center = self.ball_volume(d)
+        v_plus = self.ball_volume(d + delta)
+
+        # Phase angles
+        theta_minus = np.angle(complex(v_minus, self.ball_surface(d - delta)))
+        theta_center = np.angle(complex(v_center, self.ball_surface(d)))
+        theta_plus = np.angle(complex(v_plus, self.ball_surface(d + delta)))
+
+        # Compute velocity and acceleration
+        velocity = (theta_plus - theta_minus) / (2 * delta)
+        accel = (theta_plus - 2*theta_center + theta_minus) / (delta * delta)
+
+        return velocity, accel
+
     def analyze_complex(self, d):
         """Analyze sphere properties in complex phase space"""
         v = self.phase_volume(d)
