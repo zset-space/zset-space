@@ -423,19 +423,22 @@ class NBallAnalyzer:
 
     def dimensions(self, start=1, count=8, split=4, special=True):
         # Define the dimensions
-        dimensions = {k/split: str(k/split) for k in range(start, (split*count)+1)}
-        return sorted((dimensions if not special else dimensions | {
-            0.5: '0.5',
-            1.324718: 'plastic',
-            1.618034: 'golden',
-            e: 'e',
-            pi: 'pi',
-            5.256946: 'V-max',
-            tau - 1: 'tau-1',
-            tau: 'tau',
-            7.256946: 'SA-max',
-            tau + 1: 'tau+1',
-        }).items())
+        dimensions = {k/split: str(k/split) for k in range(start, (split*(start+count))+1)}
+        if special:
+            for d, label in (
+                (1.324718, 'plastic'),
+                (1.618034, 'golden'),
+                (e, 'e'),
+                (pi, 'pi'),
+                (5.256946, 'V-max'),
+                (tau - 1, 'tau-1'),
+                (tau, 'tau'),
+                (7.256946, 'SA-max'),
+                (tau + 1, 'tau+1')
+            ):
+                if start <= d <= start + count:
+                    dimensions[d] = label
+        return {k: dimensions[k] for k in sorted(dimensions)}
 
     def ball_volume(self, d):
         if d < 0:
