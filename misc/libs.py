@@ -206,6 +206,9 @@ Phase:          0.83932616
 import numpy as np
 from math import gamma, tau, pi, e
 
+import matplotlib.pyplot
+matplotlib.use('Agg')
+
 class NBallAnalyzer:
 
     def ball_volume(self, d):
@@ -407,35 +410,41 @@ def generate_infosheet():
     analyzer = NBallAnalyzer()
 
     # Define the first 10 integer dimensions
-    integer_dimensions = list(range(1, 11))
+    dimensions = {k: str(k) for k in range(1, 11)}
 
     # Define special dimensions with their updated numerical values
-    special_dimensions = {
-        '0.5': 0.5,
-        'plastic': 1.324718,    # Plastic Number
-        'golden': 1.618034,     # Golden Ratio
-        'e': e,                 # Euler's Number
-        'pi': pi,               # Pi
-        'V-max': 5.256946,      # V-max ≈ 5.256946
-        'tau-1': tau - 1,       # tau - 1 ≈ 5.28318531
-        'tau': tau,             # tau = 2 * pi ≈ 6.28318531
-        'SA-max': 7.256946,     # SA-max ≈ 7.256946
-        'tau+1': tau + 1        # tau + 1 ≈ 7.28318531
+    dimensions = {
+        0.5: '0.5',
+        1.324718: 'plastic',
+        1.618034: 'golden',
+        e: 'e',
+        pi: 'pi',
+        5.256946: 'V-max',
+        tau - 1: 'tau-1',
+        tau: 'tau',
+        7.256946: 'SA-max',
+        tau + 1: 'tau+1',
     }
 
-    # Combine integer and special dimensions
-    dimensions = integer_dimensions + list(special_dimensions.values())
+    # Initialize lists to store metrics for plotting
+    metrics = {
+        'Volume': [],
+        'Surface': [],
+        'Coupling Ratio': [],
+        'S/V Ratio': [],
+        'Geom Freedom': [],
+        'Phase': []
+    }
 
-    # Labels for output
-    dimension_labels = {v: k for k, v in special_dimensions.items()}
+    numerical_dims = []
 
     # Print Header
     print("N-Ball Geometry Analysis Suite")
     print("==================================================\n")
 
-    for d in dimensions:
-        label = dimension_labels.get(d, f"{int(d)}" if d == int(d) else f"{d}")
-        print(f"Dimension d = {label} ({d})")
+    for d in sorted(dimensions):
+        numerical_dims.append(d)
+        print(f"Dimension d = {dimensions[d]} ({d})")
         print("----------------------------------------")
 
         analysis = analyzer.analyze_dimension(d)
@@ -447,6 +456,63 @@ def generate_infosheet():
         print(f"S/V Ratio:      {analysis['sv_ratio']:.8f}")
         print(f"Geom Freedom:   {analysis['geometric_freedom']:.8f}")
         print(f"Phase:          {analysis['phase']:.8f}\n")
+
+        # Append metrics for plotting
+        metrics['Volume'].append(analysis['volume'])
+        metrics['Surface'].append(analysis['surface'])
+        metrics['Coupling Ratio'].append(analysis['coupling_ratio'])
+        metrics['S/V Ratio'].append(analysis['sv_ratio'])
+        metrics['Geom Freedom'].append(analysis['geometric_freedom'])
+        metrics['Phase'].append(analysis['phase'])
+
+    # Plotting the metrics
+    fig, axs = matplotlib.pyplot.subplots(2, 3, figsize=(18, 10))
+    fig.suptitle('N-Ball Geometry Metrics Across Dimensions', fontsize=16)
+
+    # Volume
+    axs[0, 0].plot(numerical_dims, metrics['Volume'], marker='o', linestyle='-', color='blue')
+    axs[0, 0].set_title('Volume vs Dimension')
+    axs[0, 0].set_xlabel('Dimension d')
+    axs[0, 0].set_ylabel('Volume')
+    axs[0, 0].grid(True)
+
+    # Surface
+    axs[0, 1].plot(numerical_dims, metrics['Surface'], marker='s', linestyle='-', color='green')
+    axs[0, 1].set_title('Surface Area vs Dimension')
+    axs[0, 1].set_xlabel('Dimension d')
+    axs[0, 1].set_ylabel('Surface Area')
+    axs[0, 1].grid(True)
+
+    # Coupling Ratio
+    axs[0, 2].plot(numerical_dims, metrics['Coupling Ratio'], marker='^', linestyle='-', color='red')
+    axs[0, 2].set_title('Coupling Ratio vs Dimension')
+    axs[0, 2].set_xlabel('Dimension d')
+    axs[0, 2].set_ylabel('Coupling Ratio')
+    axs[0, 2].grid(True)
+
+    # S/V Ratio
+    axs[1, 0].plot(numerical_dims, metrics['S/V Ratio'], marker='d', linestyle='-', color='purple')
+    axs[1, 0].set_title('S/V Ratio vs Dimension')
+    axs[1, 0].set_xlabel('Dimension d')
+    axs[1, 0].set_ylabel('S/V Ratio')
+    axs[1, 0].grid(True)
+
+    # Geom Freedom
+    axs[1, 1].plot(numerical_dims, metrics['Geom Freedom'], marker='*', linestyle='-', color='orange')
+    axs[1, 1].set_title('Geometric Freedom vs Dimension')
+    axs[1, 1].set_xlabel('Dimension d')
+    axs[1, 1].set_ylabel('Geometric Freedom')
+    axs[1, 1].grid(True)
+
+    # Phase
+    axs[1, 2].plot(numerical_dims, metrics['Phase'], marker='p', linestyle='-', color='brown')
+    axs[1, 2].set_title('Phase vs Dimension')
+    axs[1, 2].set_xlabel('Dimension d')
+    axs[1, 2].set_ylabel('Phase')
+    axs[1, 2].grid(True)
+
+    matplotlib.pyplot.tight_layout(rect=[0, 0.03, 1, 0.95])
+    matplotlib.pyplot.savefig('nball_geometry_metrics.png')
 
 if __name__ == "__main__":
     generate_infosheet()
