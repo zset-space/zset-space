@@ -626,20 +626,6 @@ class NBallAnalyzer:
 
 class ComplexSphereDynamics(NBallAnalyzer):
 
-    def ball_volume(self, d):
-        # Override to handle complex dimensions
-        try:
-            return (pi ** (d / 2)) / gamma(d / 2 + 1)
-        except:
-            return 0
-
-    def ball_surface(self, d):
-        # Override to handle complex dimensions
-        try:
-            return tau * (pi ** ((d - 2) / 2)) / gamma(d / 2)
-        except:
-            return 0
-
     def phase_volume(self, d, alpha=1.0):
         """Volume with complex phase rotation"""
         theta = (d - (tau - 1)) / 2 * pi / 2
