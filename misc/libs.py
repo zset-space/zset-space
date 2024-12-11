@@ -410,10 +410,10 @@ def generate_infosheet():
     analyzer = NBallAnalyzer()
 
     # Define the first 10 integer dimensions
-    dimensions = {k: str(k) for k in range(1, 11)}
+    dimensions = {k/5: str(k/5) for k in range(1, 51)}
 
     # Define special dimensions with their updated numerical values
-    dimensions = {
+    dimensions |= {
         0.5: '0.5',
         1.324718: 'plastic',
         1.618034: 'golden',
