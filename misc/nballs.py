@@ -411,86 +411,6 @@ Coupling Ratio:  1.16410473
 S/V Ratio:      8.00000000
 Geom Freedom:   33.75064716
 Phase:          0.86108362
-
-Dimension d = 8.25 (8.25)
-----------------------------------------
-Volume:          3.87280412
-Surface:         31.95063395
-Next Surface:    28.73896985
-Coupling Ratio:  1.18104324
-S/V Ratio:      8.25000000
-Geom Freedom:   38.76299462
-Phase:          0.86821593
-
-Dimension d = 8.5 (8.5)
-----------------------------------------
-Volume:          3.68299435
-Surface:         31.30545201
-Next Surface:    27.71691065
-Coupling Ratio:  1.19774371
-S/V Ratio:      8.50000000
-Geom Freedom:   38.78230640
-Phase:          0.87513232
-
-Dimension d = 8.75 (8.75)
-----------------------------------------
-Volume:          3.49102542
-Surface:         30.54647239
-Next Surface:    26.63353305
-Coupling Ratio:  1.21421586
-S/V Ratio:      8.75000000
-Geom Freedom:   34.00225097
-Phase:          0.88184371
-
-Dimension d = 9.0 (9.0)
-----------------------------------------
-Volume:          3.29850890
-Surface:         29.68658012
-Next Surface:    25.50164040
-Coupling Ratio:  1.23046875
-S/V Ratio:      9.00000000
-Geom Freedom:   25.27776223
-Phase:          0.88836027
-
-Dimension d = 9.25 (9.25)
-----------------------------------------
-Volume:          3.10691566
-Surface:         28.73896985
-Next Surface:    24.33354591
-Coupling Ratio:  1.24651086
-S/V Ratio:      9.25000000
-Geom Freedom:   13.98012553
-Phase:          0.89469145
-
-Dimension d = 9.5 (9.5)
-----------------------------------------
-Volume:          2.91756954
-Surface:         27.71691065
-Next Surface:    23.14093601
-Coupling Ratio:  1.26235015
-S/V Ratio:      9.50000000
-Geom Freedom:   1.77483764
-Phase:          0.90084606
-
-Dimension d = 9.75 (9.75)
-----------------------------------------
-Volume:          2.73164442
-Surface:         26.63353305
-Next Surface:    21.93475960
-Coupling Ratio:  1.27799409
-S/V Ratio:      9.75000000
-Geom Freedom:   9.63879986
-Phase:          0.90683232
-
-Dimension d = 10.0 (10.0)
-----------------------------------------
-Volume:          2.55016404
-Surface:         25.50164040
-Next Surface:    20.72514267
-Coupling Ratio:  1.29344970
-S/V Ratio:      10.00000000
-Geom Freedom:   18.78197298
-Phase:          0.91265792
 """
 
 import numpy as np
@@ -500,6 +420,22 @@ import matplotlib.pyplot
 matplotlib.use('Agg')
 
 class NBallAnalyzer:
+
+    def dimensions(self, start=1, count=8, split=4, special=True):
+        # Define the dimensions
+        dimensions = {k/split: str(k/split) for k in range(start, (split*count)+1)}
+        return dimensions if not special else dimensions | {
+            0.5: '0.5',
+            1.324718: 'plastic',
+            1.618034: 'golden',
+            e: 'e',
+            pi: 'pi',
+            5.256946: 'V-max',
+            tau - 1: 'tau-1',
+            tau: 'tau',
+            7.256946: 'SA-max',
+            tau + 1: 'tau+1',
+        }
 
     def ball_volume(self, d):
         if d < 0:
@@ -623,8 +559,33 @@ class NBallAnalyzer:
 
         return critical
 
+    def interference_pattern(self, d):
+        """Track bidirectional phase interference between adjacent dimensions"""
+        # Forward volume-to-surface transition
+        v_d = self.ball_volume(d)
+        s_d1 = self.ball_surface(d + 1)
+        forward_phase = np.angle(complex(s_d1, tau * v_d))
 
-class ComplexSphereDynamics(NBallAnalyzer):
+        # Backward surface-to-volume transition
+        s_d = self.ball_surface(d)
+        v_d1 = self.ball_volume(d - 1)
+        backward_phase = np.angle(complex(tau * v_d1, s_d))
+
+        # Phase rotation relative to τ-1
+        theta = (d - (tau - 1)) / 2 * pi / 2
+
+        # Compute interference between transitions with damping
+        interference = np.sin(forward_phase) * np.cos(backward_phase) * np.exp(-((d - tau)**2)/(2*pi))
+
+        # Extract real and imaginary components
+        real_component = interference * np.cos(theta)
+        imag_component = interference * np.sin(theta)
+
+        # Calculate total geometric freedom
+        magnitude = (real_component**2 + imag_component**2)**0.5
+        phase = np.angle(complex(real_component, imag_component))
+
+        return magnitude, phase, real_component, imag_component
 
     def phase_volume(self, d, alpha=1.0):
         """Volume with complex phase rotation"""
@@ -684,23 +645,7 @@ class ComplexSphereDynamics(NBallAnalyzer):
 
 def generate_infosheet():
     analyzer = NBallAnalyzer()
-
-    # Define the first 10 integer dimensions
-    dimensions = {k/4: str(k/4) for k in range(1, 41)}
-
-    # Define special dimensions with their updated numerical values
-    dimensions |= {
-        0.5: '0.5',
-        1.324718: 'plastic',
-        1.618034: 'golden',
-        e: 'e',
-        pi: 'pi',
-        5.256946: 'V-max',
-        tau - 1: 'tau-1',
-        tau: 'tau',
-        7.256946: 'SA-max',
-        tau + 1: 'tau+1',
-    }
+    dimensions = analyzer.dimensions()
 
     # Initialize lists to store metrics for plotting
     metrics = {
