@@ -424,7 +424,7 @@ class NBallAnalyzer:
     def dimensions(self, start=1, count=8, split=4, special=True):
         # Define the dimensions
         dimensions = {k/split: str(k/split) for k in range(start, (split*count)+1)}
-        return dimensions if not special else dimensions | {
+        return sorted((dimensions if not special else dimensions | {
             0.5: '0.5',
             1.324718: 'plastic',
             1.618034: 'golden',
@@ -435,7 +435,7 @@ class NBallAnalyzer:
             tau: 'tau',
             7.256946: 'SA-max',
             tau + 1: 'tau+1',
-        }
+        }).items())
 
     def ball_volume(self, d):
         if d < 0:
@@ -663,9 +663,9 @@ def generate_infosheet():
     print("N-Ball Geometry Analysis Suite")
     print("==================================================\n")
 
-    for d in sorted(dimensions):
+    for d, dname in dimensions:
         numerical_dims.append(d)
-        print(f"Dimension d = {dimensions[d]} ({d})")
+        print(f"Dimension d = {dname} ({d})")
         print("----------------------------------------")
 
         analysis = analyzer.analyze_dimension(d)
