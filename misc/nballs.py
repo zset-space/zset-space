@@ -421,6 +421,111 @@ class NBallAnalyzer:
             'value': values[max_idx]
         }
 
+    def analyze_quantum_state(self, d, epsilon=1e-10):
+        """Analyze quantum properties at dimension d with smooth phase transition"""
+        mag, phase, real, imag = self.interference_pattern(d)
+        freedom = self.geometric_freedom(d)
+
+        # π-step quantization
+        pi_step = round(d/pi) * pi
+        quantum_locked = abs(d - pi_step) < epsilon
+
+        # Smooth phase transition between regimes
+        if d < -epsilon:
+            # Pure quantum regime - linear π accumulation
+            accumulated_phase = d/pi
+        elif d < epsilon:
+            # Transition region - smooth interpolation
+            quantum_phase = d/pi
+            classical_phase = -1.321  # Known phase at d=0
+            weight = (d + epsilon)/(2*epsilon)
+            accumulated_phase = quantum_phase * (1-weight) + classical_phase * weight
+        else:
+            # Classical regime - tau-based rotation
+            theta = (d - (tau-1)) / 2 * pi/2
+            accumulated_phase = theta/pi
+
+        # Stability with smooth transition
+        if d < -epsilon:
+            stability = 1.0 if quantum_locked else np.exp(-(d - pi_step)**2)
+        elif d < epsilon:
+            # Smooth stability transition
+            weight = (d + epsilon)/(2*epsilon)
+            stability = (1-weight) if quantum_locked else weight * freedom
+        else:
+            stability = freedom * np.exp(-((d - (tau-1))**2)/(2*tau))
+
+        # Winding and charge with continuous evolution
+        winding = accumulated_phase/2  # Normalize to full rotations
+        charge = np.exp(2j * pi * winding)
+
+        return {
+            'dimension': d,
+            'quantum_locked': quantum_locked,
+            'phase': accumulated_phase,
+            'stability': stability,
+            'freedom': freedom,
+            'winding': winding,
+            'charge': charge,
+            'magnitude': mag,
+            'pi_step': pi_step/pi
+        }
+
+    def find_transitions(self, d_start, d_end, points=1001, epsilon=1e-10):
+        """Find quantum transitions with smooth detection"""
+        dims = np.linspace(d_start, d_end, points)
+        transitions = []
+        last_state = None
+
+        for d in dims:
+            state = self.analyze_quantum_state(d, epsilon)
+
+            if last_state is not None:
+                # Quantum transitions with hysteresis
+                if state['quantum_locked'] != last_state['quantum_locked']:
+                    transitions.append({
+                        'dimension': d,
+                        'type': 'quantum',
+                        'from_phase': last_state['phase'],
+                        'to_phase': state['phase'],
+                        'pi_step': state['pi_step']
+                    })
+
+                # Smooth stability transitions
+                stability_change = abs(state['stability'] - last_state['stability'])
+                if stability_change > 0.5:
+                    transitions.append({
+                        'dimension': d,
+                        'type': 'stability',
+                        'from_value': last_state['stability'],
+                        'to_value': state['stability']
+                    })
+
+                # Freedom peaks with continuity check
+                if (state['freedom'] > last_state['freedom'] and
+                    state['freedom'] > self.geometric_freedom(d + dims[1] - dims[0])):
+                    transitions.append({
+                        'dimension': d,
+                        'type': 'freedom',
+                        'value': state['freedom']
+                    })
+
+            last_state = state
+
+        return transitions
+
+    def compute_invariants(self, d, epsilon=1e-10):
+        """Compute geometric invariants with transition handling"""
+        state = self.analyze_quantum_state(d, epsilon)
+
+        return {
+            'dimension': d,
+            'pf_product': state['phase'] * state['freedom'],
+            'sw_product': state['stability'] * abs(state['winding']),
+            'charge': state['charge'],
+            'pi_step': state['pi_step']
+        }
+
     def main(self):
         """Run the main analysis suite, printing results for each dimension (override for custom output)."""
         print("N-Ball Geometry Analysis Suite")
