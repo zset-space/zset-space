@@ -350,6 +350,77 @@ class NBallAnalyzer:
 
         return rate, r_squared, phases, dims
 
+    def analyze_transition(self, d):
+        """Analyze dimensional transition with robust zero handling"""
+        mag, phase, real, imag = self.interference_pattern(d)
+        v_d = self.ball_volume(d)
+        s_d = self.ball_surface(d)
+        s_d1 = self.ball_surface(d + 1)
+
+        # Safe division
+        forward_ratio = s_d1/(tau * v_d) if abs(v_d) > 1e-15 else 0
+        backward_ratio = s_d/(tau * self.ball_volume(d-1)) if d > 0 and abs(self.ball_volume(d-1)) > 1e-15 else 0
+
+        # Safe gamma ratio calculation
+        try:
+            g_ratio = gamma(d/2 + 1)/gamma(d/2) if d != 0 else 0
+        except:
+            g_ratio = 0
+
+        return {
+            'dimension': d,
+            'phase': phase,
+            'forward_ratio': forward_ratio,
+            'backward_ratio': backward_ratio,
+            'gamma_ratio': g_ratio,
+            'freedom': self.geometric_freedom(d)
+        }
+
+    def find_transitions(self, d_start=-5, d_end=10, points=10001):
+        """Find and analyze all critical transitions"""
+        transitions = []
+
+        CRITICAL_VALUES = {
+            'quantum_transitions': [-448/625, 0, 1.284, 9.284], # Approximate critical points, unknown meaning
+            'phase_alignments': [(tau-1, 0), (tau, pi/4), (tau+1, pi/2)]
+        }
+
+        # Check known critical points
+        for d in CRITICAL_VALUES['quantum_transitions']:
+            if d_start <= d <= d_end:
+                analysis = self.analyze_transition(d)
+                transitions.append(analysis)
+
+        # Check phase alignment points
+        for d, target_phase in CRITICAL_VALUES['phase_alignments']:
+            if d_start <= d <= d_end:
+                analysis = self.analyze_transition(d)
+                transitions.append(analysis)
+
+        return sorted(transitions, key=lambda x: x['dimension'])
+
+    def find_maxima(self):
+        """Find precise maxima with safe bounds"""
+        v_max = self.find_maximum(self.ball_volume, 5.25, 5.27)
+        s_max = self.find_maximum(self.ball_surface, 7.25, 7.27)
+        f_max = self.find_maximum(self.geometric_freedom, 6.11, 6.13)
+
+        return {
+            'volume': v_max,
+            'surface': s_max,
+            'freedom': f_max
+        }
+
+    def find_maximum(self, func, start, end, points=1001):
+        """Find maximum with safe bounds and error checking"""
+        dims = np.linspace(start, end, points)
+        values = [func(d) for d in dims]
+        max_idx = np.argmax(values)
+        return {
+            'dimension': dims[max_idx],
+            'value': values[max_idx]
+        }
+
     def main(self):
         """Run the main analysis suite, printing results for each dimension (override for custom output)."""
         print("N-Ball Geometry Analysis Suite")
