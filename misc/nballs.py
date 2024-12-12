@@ -1,4 +1,72 @@
-"""N-Ball Geometry Analysis Suite"""
+"""N-Ball Geometry Analysis Suite
+
+A library for exploring dimensional evolution and rotation through geometric and phase relationships.
+Focuses on surface-volume coupling, phase transitions, and rotational freedom across dimensions.
+
+Core Relationships:
+   S(d+1) = τ·V(d) # Surface-volume coupling
+   V(d) = π^(d/2) / Γ(d/2 + 1) # N-ball volume
+   S(d) = τ·π^((d-2)/2) / Γ(d/2) # N-ball surface area
+
+The sphere appears to rotate between real and imaginary domains with precise phase evolution,
+potentially producing interference patterns through partial domain occlusion.
+
+Critical Points:
+   Volume maximum: ≈ 5.256946 (near τ-1)
+   Surface maximum: ≈ 7.256946 (near τ+1)
+
+Usage Example:
+   class ExperimentAnalyzer(NBallAnalyzer):
+
+       def main(self):
+           # Run analysis suite and print results!
+           for d, label in self.dimensions(start=1, count=8, split=4).items():
+               analysis = self.analyze_dimension(d)
+               magnitude, phase, real, imag = self.interference_pattern(d)
+               for d, label in self.dimensions().items():
+                   # Run analysis suite and print results!
+                   pass
+
+   if __name__ == "__main__":
+       analyzer = ExperimentAnalyzer()
+       analyzer.main()
+
+Core Methods:
+   dimensions(start=1, count=8, split=4, special=True):
+       Returns dictionary of dimensions with labels, including special points.
+       Controls range, resolution and inclusion of critical values.
+
+   ball_volume(d): Calculate n-ball volume
+   ball_surface(d): Calculate n-ball surface area
+
+   analyze_dimension(d):
+       Returns comprehensive analysis including:
+       - Volume and surface area
+       - Coupling ratio and geometric freedom
+       - Phase relationships
+
+   phase_volume(d, alpha=1.0): Complex phase space volume
+   interference_pattern(d): Phase interference analysis
+   rotational_freedom(d): Effective rotational freedom
+   transition_coupling(d): Coupling strength between dimensions
+   phase_rate(d1, d2, points=1001): Phase evolution rate analysis
+
+   find_critical_points(): Identify maxima, minima, inflections
+   analyze_complex(d): Complex phase space analysis
+
+Implementation Guidelines:
+1. Use dimensions() to ensure consistent sampling of dimension space
+2. Maintain continuous transitions - discontinuities indicate errors
+3. Never hardcode sphere calculations - use provided methods
+4. Verify patterns in both success and failure cases
+5. Focus on mathematical relationships over code structure
+6. Examine phase transitions and interference patterns carefully
+7. Build on existing functionality through subclassing
+
+The library emphasizes discovering fundamental patterns in dimensional evolution
+through rapid mathematical exploration. Core volume/surface calculations are
+well-verified; complex phase methods may require additional validation.
+"""
 
 import numpy as np
 from math import gamma, tau, pi, e
@@ -282,97 +350,22 @@ class NBallAnalyzer:
 
         return rate, r_squared, phases, dims
 
-def generate_infosheet():
-    analyzer = NBallAnalyzer()
-    dimensions = analyzer.dimensions()
-
-    # Initialize lists to store metrics for plotting
-    metrics = {
-        'Volume': [],
-        'Surface': [],
-        'Coupling Ratio': [],
-        'S/V Ratio': [],
-        'Geom Freedom': [],
-        'Phase': []
-    }
-
-    numerical_dims = []
-
-    # Print Header
-    print("N-Ball Geometry Analysis Suite")
-    print("==================================================\n")
-
-    for d in dimensions:
-        numerical_dims.append(d)
-        print(f"Dimension d = {dimensions[d]} ({d})")
-        print("----------------------------------------")
-
-        analysis = analyzer.analyze_dimension(d)
-
-        print(f"Volume:          {analysis['volume']:.8f}")
-        print(f"Surface:         {analysis['surface']:.8f}")
-        print(f"Next Surface:    {analysis['next_surface']:.8f}")
-        print(f"Coupling Ratio:  {analysis['coupling_ratio']:.8f}")
-        print(f"S/V Ratio:      {analysis['sv_ratio']:.8f}")
-        print(f"Geom Freedom:   {analysis['geometric_freedom']:.8f}")
-        print(f"Phase:          {analysis['phase']:.8f}\n")
-
-        # Append metrics for plotting
-        metrics['Volume'].append(analysis['volume'])
-        metrics['Surface'].append(analysis['surface'])
-        metrics['Coupling Ratio'].append(analysis['coupling_ratio'])
-        metrics['S/V Ratio'].append(analysis['sv_ratio'])
-        metrics['Geom Freedom'].append(analysis['geometric_freedom'])
-        metrics['Phase'].append(analysis['phase'])
-
-    # Plotting the metrics
-    fig, axs = matplotlib.pyplot.subplots(2, 3, figsize=(18, 10))
-    fig.suptitle('N-Ball Geometry Metrics Across Dimensions', fontsize=16)
-
-    # Volume
-    axs[0, 0].plot(numerical_dims, metrics['Volume'], marker='o', linestyle='-', color='blue')
-    axs[0, 0].set_title('Volume vs Dimension')
-    axs[0, 0].set_xlabel('Dimension d')
-    axs[0, 0].set_ylabel('Volume')
-    axs[0, 0].grid(True)
-
-    # Surface
-    axs[0, 1].plot(numerical_dims, metrics['Surface'], marker='s', linestyle='-', color='green')
-    axs[0, 1].set_title('Surface Area vs Dimension')
-    axs[0, 1].set_xlabel('Dimension d')
-    axs[0, 1].set_ylabel('Surface Area')
-    axs[0, 1].grid(True)
-
-    # Coupling Ratio
-    axs[0, 2].plot(numerical_dims, metrics['Coupling Ratio'], marker='^', linestyle='-', color='red')
-    axs[0, 2].set_title('Coupling Ratio vs Dimension')
-    axs[0, 2].set_xlabel('Dimension d')
-    axs[0, 2].set_ylabel('Coupling Ratio')
-    axs[0, 2].grid(True)
-
-    # S/V Ratio
-    axs[1, 0].plot(numerical_dims, metrics['S/V Ratio'], marker='d', linestyle='-', color='purple')
-    axs[1, 0].set_title('S/V Ratio vs Dimension')
-    axs[1, 0].set_xlabel('Dimension d')
-    axs[1, 0].set_ylabel('S/V Ratio')
-    axs[1, 0].grid(True)
-
-    # Geom Freedom
-    axs[1, 1].plot(numerical_dims, metrics['Geom Freedom'], marker='*', linestyle='-', color='orange')
-    axs[1, 1].set_title('Geometric Freedom vs Dimension')
-    axs[1, 1].set_xlabel('Dimension d')
-    axs[1, 1].set_ylabel('Geometric Freedom')
-    axs[1, 1].grid(True)
-
-    # Phase
-    axs[1, 2].plot(numerical_dims, metrics['Phase'], marker='p', linestyle='-', color='brown')
-    axs[1, 2].set_title('Phase vs Dimension')
-    axs[1, 2].set_xlabel('Dimension d')
-    axs[1, 2].set_ylabel('Phase')
-    axs[1, 2].grid(True)
-
-    matplotlib.pyplot.tight_layout(rect=[0, 0.03, 1, 0.95])
-    matplotlib.pyplot.savefig('nball_geometry_metrics.png')
+    def main(self):
+        """Run the main analysis suite, printing results for each dimension (override for custom output)."""
+        print("N-Ball Geometry Analysis Suite")
+        print("==================================================\n")
+        for d, label in self.dimensions().items():
+            print(f"Dimension d = {label} ({d})")
+            print("----------------------------------------")
+            analysis = self.analyze_dimension(d)
+            print(f"Volume:          {analysis['volume']:.8f}")
+            print(f"Surface:         {analysis['surface']:.8f}")
+            print(f"Next Surface:    {analysis['next_surface']:.8f}")
+            print(f"Coupling Ratio:  {analysis['coupling_ratio']:.8f}")
+            print(f"S/V Ratio:      {analysis['sv_ratio']:.8f}")
+            print(f"Geom Freedom:   {analysis['geometric_freedom']:.8f}")
+            print(f"Phase:          {analysis['phase']:.8f}\n")
 
 if __name__ == "__main__":
-    generate_infosheet()
+    analyzer = NBallAnalyzer()
+    analyzer.main()
