@@ -69,12 +69,16 @@ well-verified; complex phase methods may require additional validation.
 """
 
 import numpy as np
-from math import gamma, tau, pi, e
-
+from math import e, pi, tau, factorial
+from scipy.special import gamma
+import matplotlib.pyplot as plt
 import matplotlib.pyplot
 matplotlib.use('Agg')
 
 class NBallAnalyzer:
+
+    def __init__(self):
+        self.EPSILON = 1e-10
 
     def dimensions(self, start=1, count=8, split=4, special=True):
         # Define the dimensions
@@ -376,29 +380,6 @@ class NBallAnalyzer:
             'freedom': self.geometric_freedom(d)
         }
 
-    def find_transitions(self, d_start=-5, d_end=10, points=10001):
-        """Find and analyze all critical transitions"""
-        transitions = []
-
-        CRITICAL_VALUES = {
-            'quantum_transitions': [-448/625, 0, 1.284, 9.284], # Approximate critical points, unknown meaning
-            'phase_alignments': [(tau-1, 0), (tau, pi/4), (tau+1, pi/2)]
-        }
-
-        # Check known critical points
-        for d in CRITICAL_VALUES['quantum_transitions']:
-            if d_start <= d <= d_end:
-                analysis = self.analyze_transition(d)
-                transitions.append(analysis)
-
-        # Check phase alignment points
-        for d, target_phase in CRITICAL_VALUES['phase_alignments']:
-            if d_start <= d <= d_end:
-                analysis = self.analyze_transition(d)
-                transitions.append(analysis)
-
-        return sorted(transitions, key=lambda x: x['dimension'])
-
     def find_maxima(self):
         """Find precise maxima with safe bounds"""
         v_max = self.find_maximum(self.ball_volume, 5.25, 5.27)
@@ -526,8 +507,159 @@ class NBallAnalyzer:
             'pi_step': state['pi_step']
         }
 
+    def compute_resonance_state(self, d):
+        """Compute quantum resonance state at dimension d"""
+        try:
+            # Basic components
+            mag, phase, real, imag = self.interference_pattern(d)
+            freedom = self.geometric_freedom(d)
+
+            # Complex dimension analysis
+            z = complex(d, 0)
+            complex_volume = self.compute_complex_volume(z)
+
+            # Phase state
+            theta = (d - (tau-1)) / 2 * pi/2
+            state = np.exp(1j * theta)
+
+            # Resonance components
+            resonance = self.compute_resonance(d)
+            tunneling = self.compute_tunneling(d)
+            entanglement = self.compute_entanglement(d)
+
+            return {
+                'dimension': d,
+                'state': state,
+                'resonance': resonance,
+                'tunneling': tunneling,
+                'entanglement': entanglement,
+                'complex_volume': complex_volume,
+                'freedom': freedom,
+                'valid': True
+            }
+        except Exception as e:
+            return {'valid': False, 'error': str(e)}
+
+    def compute_complex_volume(self, z):
+        """Compute n-ball volume for complex dimension z"""
+        try:
+            return pi**(z/2) / complex_gamma(z/2 + 1)
+        except:
+            return 0
+
+    def compute_resonance(self, d):
+        """Compute dimensional resonance pattern"""
+        # Base resonance from π/2 rotation
+        theta = (d - (tau-1)) / 2
+        base = np.sin(theta * pi/2)
+
+        # Quantum correction term
+        quantum = np.exp(-((d - int(d))**2)/(2*self.EPSILON))
+
+        # Combined resonance with phase
+        return base * quantum * np.exp(1j * theta)
+
+    def compute_tunneling(self, d):
+        """Compute tunneling probability between dimensions"""
+        # Barrier height varies with dimensional gap
+        barrier = abs(d - round(d))
+
+        # Tunneling probability
+        if barrier < self.EPSILON:
+            return 1.0
+        return np.exp(-barrier * pi)
+
+    def compute_entanglement(self, d):
+        """Compute geometric entanglement between adjacent dimensions"""
+        d1 = int(d)
+        d2 = d1 + 1
+
+        # Relative phase between dimensions
+        phase1 = self.geometric_freedom(d1) * np.exp(1j * d1 * pi/2)
+        phase2 = self.geometric_freedom(d2) * np.exp(1j * d2 * pi/2)
+
+        # Entanglement measure
+        return abs(phase1 * np.conj(phase2))
+
+    def analyze_fractional_dimensions(self, start=0, end=10, points=2001):
+        """Analyze behavior in fractional dimensions"""
+        dims = np.linspace(start, end, points)
+        states = []
+
+        for d in dims:
+            state = self.compute_resonance_state(d)
+            if state['valid']:
+                states.append(state)
+
+        return dims[:len(states)], states
+
+    def find_stable_fractionals(self, tolerance=1e-3):
+        """Find potentially stable fractional dimensions"""
+        dims, states = self.analyze_fractional_dimensions()
+        stable = []
+
+        for d, state in zip(dims, states):
+            # Check stability conditions
+            resonance_mag = abs(state['resonance'])
+            tunneling = state['tunneling']
+            entanglement = state['entanglement']
+
+            # Stability criteria
+            if (resonance_mag > 0.9 and  # Strong resonance
+                tunneling < 0.1 and      # Low tunneling
+                entanglement > 0.5):     # Significant entanglement
+                stable.append((d, state))
+
+        return stable
+
+    def figure(self):
+        dims, states = self.analyze_fractional_dimensions()
+
+        # Extract components
+        resonances = [s['resonance'] for s in states]
+        tunnelings = [s['tunneling'] for s in states]
+        entanglements = [s['entanglement'] for s in states]
+        complex_vols = [s['complex_volume'] for s in states]
+
+        fig = plt.figure(figsize=(15, 12))
+
+        # Resonance pattern
+        ax1 = plt.subplot(2, 2, 1)
+        ax1.plot(dims, [abs(r) for r in resonances], 'b-',
+                label='Resonance', alpha=0.7)
+        ax1.plot(dims, tunnelings, 'r--',
+                label='Tunneling', alpha=0.7)
+        ax1.set_title('Quantum Resonance Pattern')
+        ax1.grid(True, alpha=0.3)
+        ax1.legend()
+
+        # Complex volume evolution
+        ax2 = plt.subplot(2, 2, 2)
+        ax2.plot(dims, [abs(v) for v in complex_vols], 'g-', alpha=0.7)
+        ax2.set_title('Complex Volume Evolution')
+        ax2.grid(True, alpha=0.3)
+
+        # Entanglement strength
+        ax3 = plt.subplot(2, 2, 3)
+        ax3.plot(dims, entanglements, 'b-', alpha=0.7)
+        ax3.set_title('Dimensional Entanglement')
+        ax3.grid(True, alpha=0.3)
+
+        # Phase space resonance
+        ax4 = plt.subplot(2, 2, 4, projection='polar')
+        theta = np.angle([r for r in resonances])
+        r = [abs(r) for r in resonances]
+        ax4.scatter(theta, r, c=dims, cmap='twilight', s=2, alpha=0.6)
+        ax4.set_title('Phase Space Resonance')
+
+        plt.tight_layout()
+        return fig
+
     def main(self):
         """Run the main analysis suite, printing results for each dimension (override for custom output)."""
+        _ = self.figure()
+        plt.savefig('nballs.png')
+        plt.close('all')
         print("N-Ball Geometry Analysis Suite")
         print("==================================================\n")
         for d, label in self.dimensions().items():
