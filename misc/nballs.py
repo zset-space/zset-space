@@ -69,16 +69,20 @@ well-verified; complex phase methods may require additional validation.
 """
 
 import numpy as np
-from math import e, pi, tau, factorial
+from numpy import e, pi
 from scipy.special import gamma
 import matplotlib.pyplot as plt
 import matplotlib.pyplot
 matplotlib.use('Agg')
+tau = np.pi * 2
 
 class NBallAnalyzer:
 
     def __init__(self):
-        self.EPSILON = 1e-10
+        self.epsilon = 1e-10
+        self.tau = tau
+        self.pi = pi
+        self.e = e
 
     def dimensions(self, start=1, count=8, split=4, special=True):
         # Define the dimensions
@@ -402,24 +406,24 @@ class NBallAnalyzer:
             'value': values[max_idx]
         }
 
-    def analyze_quantum_state(self, d, epsilon=1e-10):
+    def analyze_quantum_state(self, d):
         """Analyze quantum properties at dimension d with smooth phase transition"""
         mag, phase, real, imag = self.interference_pattern(d)
         freedom = self.geometric_freedom(d)
 
         # π-step quantization
         pi_step = round(d/pi) * pi
-        quantum_locked = abs(d - pi_step) < epsilon
+        quantum_locked = abs(d - pi_step) < self.epsilon
 
         # Smooth phase transition between regimes
-        if d < -epsilon:
+        if d < -self.epsilon:
             # Pure quantum regime - linear π accumulation
             accumulated_phase = d/pi
-        elif d < epsilon:
+        elif d < self.epsilon:
             # Transition region - smooth interpolation
             quantum_phase = d/pi
             classical_phase = -1.321  # Known phase at d=0
-            weight = (d + epsilon)/(2*epsilon)
+            weight = (d + self.epsilon)/(2*self.epsilon)
             accumulated_phase = quantum_phase * (1-weight) + classical_phase * weight
         else:
             # Classical regime - tau-based rotation
@@ -427,11 +431,11 @@ class NBallAnalyzer:
             accumulated_phase = theta/pi
 
         # Stability with smooth transition
-        if d < -epsilon:
+        if d < -self.epsilon:
             stability = 1.0 if quantum_locked else np.exp(-(d - pi_step)**2)
-        elif d < epsilon:
+        elif d < self.epsilon:
             # Smooth stability transition
-            weight = (d + epsilon)/(2*epsilon)
+            weight = (d + self.epsilon)/(2*self.epsilon)
             stability = (1-weight) if quantum_locked else weight * freedom
         else:
             stability = freedom * np.exp(-((d - (tau-1))**2)/(2*tau))
@@ -452,14 +456,14 @@ class NBallAnalyzer:
             'pi_step': pi_step/pi
         }
 
-    def find_transitions(self, d_start, d_end, points=1001, epsilon=1e-10):
+    def find_transitions(self, d_start, d_end, points=1001):
         """Find quantum transitions with smooth detection"""
         dims = np.linspace(d_start, d_end, points)
         transitions = []
         last_state = None
 
         for d in dims:
-            state = self.analyze_quantum_state(d, epsilon)
+            state = self.analyze_quantum_state(d)
 
             if last_state is not None:
                 # Quantum transitions with hysteresis
@@ -495,9 +499,9 @@ class NBallAnalyzer:
 
         return transitions
 
-    def compute_invariants(self, d, epsilon=1e-10):
+    def compute_invariants(self, d):
         """Compute geometric invariants with transition handling"""
-        state = self.analyze_quantum_state(d, epsilon)
+        state = self.analyze_quantum_state(d)
 
         return {
             'dimension': d,
