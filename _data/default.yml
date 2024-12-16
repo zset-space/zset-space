@@ -8,5 +8,7 @@ brand:
 nav:
 - title: Geometric Zero
   url: "/#readme"
+- title: Rotation Basis
+  url: "/basis/#readme"
 - title: ZSET
   url: "/ZSET/#readme"
