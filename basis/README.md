@@ -3,9 +3,9 @@
 ## I. CORE WAVE EQUATION
 
 Base state evolution through dimensional phase space:
-\[
+\\[
 \psi(d) = e^{-\frac{d^{2}}{4\pi}} e^{i d}
-\]
+\\]
 
 Forward/backward components:
 \[
