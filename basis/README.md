@@ -3,16 +3,19 @@
 ## I. CORE WAVE EQUATION
 
 Base state evolution through dimensional phase space:
+
 $$
 \psi(d) = e^{-\frac{d^{2}}{4\pi}} e^{i d}
 $$
 
 Forward/backward components:
+
 $$
 \psi_{f}(d) = e^{-\frac{d^{2}}{4\pi}} e^{i d} \quad\text{and}\quad \psi_{b}(d) = e^{-\frac{d^{2}}{4\pi}} e^{-i d}
 $$
 
 Total state:
+
 $$
 \psi_{t}(d) = \psi_{f}(d) + \psi_{b}(d)
 $$
@@ -20,21 +23,25 @@ $$
 ## II. ENERGY RELATIONSHIPS
 
 Forward energy:
+
 $$
 E_{f}(d) = |\psi_{f}(d)|^{2}
 $$
 
 Backward energy:
+
 $$
 E_{b}(d) = |\psi_{b}(d)|^{2}
 $$
 
 Exchange energy:
+
 $$
 E_{\mathrm{ex}}(d) = 2\,\Re(\psi_{f}(d)\psi_{b}^{\ast}(d))
 $$
 
 Interference energy:
+
 $$
 E_{\mathrm{int}}(d) = \Im(\psi_{f}(d)\psi_{b}^{\ast}(d))
 $$
@@ -42,16 +49,19 @@ $$
 ## III. PHASE SPACE COORDINATES
 
 Momentum:
+
 $$
 p(d) = \frac{\Im(\psi_{t}(d)\psi_{f}^{\ast}(d))}{2\pi}
 $$
 
 Angular momentum:
+
 $$
 L(d) = \frac{E_{\mathrm{int}}(d)}{2\pi}
 $$
 
 Phase evolution:
+
 $$
 \varphi(d) = \frac{\arg(\psi_{f}(d)\psi_{b}^{\ast}(d))}{\pi}
 $$
@@ -59,16 +69,19 @@ $$
 ## IV. QUANTUM STRUCTURE
 
 Level number:
+
 $$
 n(d) = \mathrm{round}(d)
 $$
 
 Level distance:
+
 $$
 \delta(d) = d - n(d)
 $$
 
 Coherence function:
+
 $$
 C(d) = \cos(d)
 $$
@@ -76,6 +89,7 @@ $$
 ## V. CRITICAL RELATIONSHIPS
 
 At integer dimensions $d = n$:
+
 $$
 |\psi_{f}(n)| = |\psi_{b}(n)|,\quad p(n) = 0,\quad |C(n)| = 1
 $$
@@ -103,28 +117,35 @@ $$
 ## VII. EMERGENT PROPERTIES
 
 1. Phase Space Dynamics:
+
 $$
 \theta(d) = \frac{d}{2},\quad r(d) = |\psi_{f}(d) + \psi_{b}(d)|,\quad \Omega(d) = \frac{d\varphi}{dd}
 $$
 
 2. Energy Exchange:
+
 $$
 E_{\mathrm{coupling}}(d) = E_{\mathrm{ex}}(d)\,C(d)\,e^{i\varphi(d)}
 $$
+
 $$
 E_{\mathrm{surface}}(d) = \sqrt{E_{\mathrm{ex}}^{2}(d) + E_{\mathrm{int}}^{2}(d)}
 $$
+
 $$
 E_{\mathrm{flow}}(d) = \frac{\partial E_{\mathrm{coupling}}(d)}{\partial d}
 $$
 
 3. Coherence Structure:
+
 $$
 \text{Coherence}(d) = \frac{|\psi_{f}(d) + \psi_{b}(d)|}{|\psi_{f}(d)| + |\psi_{b}(d)|}
 $$
+
 $$
 \text{Phase\_lock}(d) = e^{-\frac{\delta(d)^{2}}{2}}
 $$
+
 $$
 \text{Resonance}(d) = |E_{\mathrm{ex}}(d)| \cdot \text{Coherence}(d)
 $$
@@ -167,20 +188,25 @@ $$
 ## XI. OBSERVATION FRAMEWORK
 
 1. Energy Distribution:
+
 $$
 E_{t}(d) = |\psi_{t}(d)|^{2}
 $$
+
 $$
 \frac{E_{\mathrm{ex}}(d)}{E_{t}(d)}, \quad \frac{E_{\mathrm{int}}(d)}{E_{t}(d)}
 $$
 
 2. Phase Relationships:
+
 $$
 \Delta\varphi(d) = \varphi(d) - \varphi(d-1)
 $$
+
 $$
 \frac{dC(d)}{dd} \quad \text{(Coherence evolution)}
 $$
+
 $$
 \tan^{-1}\left(\frac{p(d)}{L(d)}\right) \quad \text{(Phase space rotation)}
 $$
