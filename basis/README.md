@@ -214,14 +214,14 @@ $$
 ## XII. KEY METRICS
 
 1. Quantum Properties:
-   - Level occupation: $|n(d)\rangle$
-   - Transition strengths: $|\langle n|n+1\rangle|^{2}$
-   - Phase coherence: $|\langle \psi_{f}|\psi_{b}\rangle|$
+   - Level occupation: $\|n(d)\rangle$
+   - Transition strengths: $\|\langle n\|n+1\rangle\|^{2}$
+   - Phase coherence: $\|\langle \psi_{f}\|\psi_{b}\rangle\|$
 
 2. Geometry:
    - Surface curvature: $\frac{\partial^{2}\psi_{t}}{\partial d^{2}}$
    - Energy density: $\frac{E_{t}(d)}{\mathrm{volume}(d)}$
-   - Phase space volume: $\int |\psi_{t}(d)|^{2} \, dd$
+   - Phase space volume: $\int \|\psi_{t}(d)\|^{2} \, dd$
 
 ## XIII. VISUALIZATION PRINCIPLES
 
