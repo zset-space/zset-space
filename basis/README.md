@@ -143,7 +143,7 @@ $$
 $$
 
 $$
-\text{Phase\_lock}(d) = e^{-\frac{\delta(d)^{2}}{2}}
+\text{Phaselock}(d) = e^{-\frac{\delta(d)^{2}}{2}}
 $$
 
 $$
