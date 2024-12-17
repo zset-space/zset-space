@@ -5,7 +5,7 @@
 Base state evolution through dimensional phase space:
 
 $$
-\psi(d) = e^{-\frac{d^{2}}{4\pi}} e^{i d}
+\psi(d) = e^{-\frac{d^{2}}{4\pi}} e^{\pm i d}
 $$
 
 Forward/backward components:
