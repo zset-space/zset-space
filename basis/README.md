@@ -186,7 +186,7 @@ The framework exhibits several essential symmetries:
 
 - Mirror symmetry: $\psi(-d) = \psi^{\ast}(d)$
 - Phase periodicity: $\varphi(d + 2\pi) = \varphi(d)$
-- Energy conservation: $|\psi_f(d)|^2 + |\psi_b(d)|^2 = \text{constant}$
+- Energy conservation: $`|\psi_f(d)|^2 + |\psi_b(d)|^2 = \text{constant}`$
 - Quantum correspondence: $n(d) \to d$ as $d \to \text{integer}$
 
 ### 4.2 Conservation Principles
@@ -359,7 +359,7 @@ The framework provides foundations for exploring:
 2. Higher-order interference patterns and their implications
 3. Applications to physical systems and geometric topology
 4. Connections to quantum field theory and string theory
-5. Novel computational approaches to dimensional analysis
+5. New computational approaches to dimensional analysis
 
 ## X. Conclusion
 
