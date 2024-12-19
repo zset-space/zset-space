@@ -186,7 +186,6 @@ The framework exhibits several essential symmetries:
 
 - Mirror symmetry: $\psi(-d) = \psi^{\ast}(d)$
 - Phase periodicity: $\varphi(d + 2\pi) = \varphi(d)$
-- Energy conservation: $`|\psi_f(d)|^2 + |\psi_b(d)|^2 = \text{constant}`$
 - Quantum correspondence: $n(d) \to d$ as $d \to \text{integer}$
 
 ### 4.2 Conservation Principles
