@@ -102,9 +102,9 @@ $$
 
 This relationship reveals three critical points:
 
-- Volume maximum: $\tau - 1 \approx 5.25694$
-- Rotational maximum: $\tau \approx 6.11878$
-- Surface area maximum: $\tau + 1 \approx 7.25694$
+- Volume maximum (V-max): $\approx 5.25694$ or $\tau - \approx 1.02624$
+- Rotational maximum (R-max): $\approx 6.11877$ or $\tau - \approx 0.16441$
+- Surface area maximum (S-max): $\approx 7.25694$ or $\tau + \approx 0.97375$
 
 ### 3.2 Quantum Structure
 
