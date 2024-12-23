@@ -49,7 +49,7 @@ $$
 where amplitude $A(d)$ emerges from geometric constraints through:
 
 $$
-A(d) = F(d)e^{-d^2/4\tau}
+A(d) = F(d)e^{-d^2/2\tau}
 $$
 
 This structure naturally produces interference patterns that organize rotational freedom.
