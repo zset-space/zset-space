@@ -158,7 +158,7 @@ $$
 The wave amplitude modulates through:
 
 $$
-A(d) = A_0(1-d)e^{-d/\tau}, \quad 0 < d < 1
+A(d) = A_0(1-d)e^{-d/2\tau}, \quad 0 < d < 1
 $$
 
 ### C. Negative Dimension Structure
@@ -205,7 +205,7 @@ Geometric consistency maintained through:
 
 3. Phase Consistency:
    $$
-   \oint \frac{d}{d\theta}\arg(\psi)d\theta = 2\pi n
+   \oint \frac{d}{d\theta}\arg(\psi)d\theta = \tau n
    $$
 
 ### C. Visualization Requirements
