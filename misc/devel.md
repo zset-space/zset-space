@@ -146,8 +146,11 @@ Topologically, an n-sphere can be constructed as a one-point compactification of
 ## Relationships
 
 **Identities:**
-- S(d)/V(d) = d
-- S(d+1) = 2πV(d)
+- V(d) = S(d)/d
+- V(d) = S(d+1)/τ
+- S(d) = S(d+1)*d/τ
+- S(d+1) = S(d)*τ/d
+- V(d+1) = S(d)*τ/(d(d+1))
 
 ## Known values
 
