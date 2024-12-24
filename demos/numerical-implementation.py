@@ -20,25 +20,25 @@ def phase_evolution(state: PhaseState, dt: float) -> PhaseState:
     p_half = state.p - 0.5 * dt * state.q  # Kick
     q_new = state.q + dt * p_half         # Drift
     p_new = p_half - 0.5 * dt * q_new     # Kick
-    
+
     # Phase evolution from Hamiltonian
     H = compute_hamiltonian(state)
     phase_new = state.phase + dt * H
-    
+
     # Dimensional evolution based on phase coherence
     dim_new = state.dimension + dt * np.sin(phase_new - state.phase)
-    
+
     return PhaseState(q_new, p_new, phase_new, dim_new)
 
 def compute_interference_pattern(states: List[PhaseState]) -> np.ndarray:
     """Compute interference pattern from phase evolution."""
     phases = np.array([s.phase for s in states])
     dimensions = np.array([s.dimension for s in states])
-    
+
     # Forward and backward waves
     psi_f = np.exp(1j * phases) * np.exp(-dimensions**2/4/np.pi)
     psi_b = np.exp(-1j * phases) * np.exp(-dimensions**2/4/np.pi)
-    
+
     # Interference pattern
     return np.abs(psi_f + psi_b)**2
 
@@ -48,15 +48,15 @@ def verify_stability(states: List[PhaseState], threshold: float = 0.9) -> bool:
     phases = np.array([s.phase for s in states])
     phase_diff = np.diff(phases)
     coherence = np.abs(np.mean(np.exp(1j * phase_diff)))
-    
+
     # Energy conservation
     energies = np.array([compute_hamiltonian(s) for s in states])
     energy_conserved = np.std(energies) < threshold * np.mean(energies)
-    
+
     # Dimensional stability
     dimensions = np.array([s.dimension for s in states])
     dim_stable = np.std(dimensions) < threshold
-    
+
     return coherence > threshold and energy_conserved and dim_stable
 
 class BoundaryState(NamedTuple):
@@ -69,12 +69,12 @@ def evolve_boundary(boundary: BoundaryState, bulk: PhaseState, dt: float) -> Bou
     """Evolve boundary consistent with bulk evolution."""
     # Update surface coordinates using normal flow
     new_coords = boundary.surface_coords + dt * boundary.normal
-    
+
     # Update normal vector
     new_normal = boundary.normal - dt * np.gradient(new_coords)
     new_normal /= np.linalg.norm(new_normal)
-    
+
     # Update boundary phase to maintain consistency with bulk
     new_phase = boundary.phase + dt * compute_hamiltonian(bulk)
-    
+
     return BoundaryState(new_coords, new_normal, new_phase)
