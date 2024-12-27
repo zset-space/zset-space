@@ -25,75 +25,65 @@ const vertexShader = `
   const float PI = 3.141592653589793;
   const float TAU = 6.283185307179586;
 
-  // ------------------------------------------------------
-  // Double-lobed Bernoulli Lemniscate (Variant B):
-  //   - We double the angle: u = 2*t
-  //   - We flip sin(u) => -sin(u) to orient downward
-  // ------------------------------------------------------
-  vec2 getLemniscatePosition(float t) {
-    float u = 2.0 * t;
-    float sint = -sin(u);   // negative to flip vertically
-    float cost = cos(u);
+  struct WaveComponents {
+    float basePhase;          // Base dimensional phase
+    float nonLinearPhase;     // Phase with precession
+    float waveValue;          // Combined wave value
+    vec2 direction;           // Primary direction vector
+  };
 
-    float denom = 1.0 + sint * sint;
-    return vec2(
-      cost / denom,
-      cost * sint / denom
-    );
-  }
-
-  // ------------------------------------------------------
-  // HSV -> RGB
-  // ------------------------------------------------------
   vec3 hsv2rgb(vec3 c) {
     vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
     vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
     return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
   }
 
-  // ------------------------------------------------------
-  // Dimension-based color with updated brightness
-  //   S=0.85, V=0.85 (or slight tweak for baseDim)
-  // ------------------------------------------------------
+  WaveComponents computeWaves(float phase, float layer, float dim) {
+    WaveComponents w;
+
+    w.basePhase = TAU * layer / max(0.1, dim);
+    w.nonLinearPhase = w.basePhase + (symmetryBalance - 1.0) * PI * sin(w.basePhase);
+
+    // Keep the original wave computation that we know works
+    w.waveValue = sin(w.nonLinearPhase * (layer + 1.0));
+    w.direction = vec2(cos(w.nonLinearPhase), sin(w.nonLinearPhase));
+
+    return w;
+  }
+
+  vec2 getLemniscatePosition(float t, WaveComponents w) {
+    float u = 2.0 * (t + 0.5 * w.nonLinearPhase);
+    float sint = -sin(u);
+    float cost = cos(u);
+    float denom = 1.0 + sint * sint;
+    return vec2(cost / denom, cost * sint / denom);
+  }
+
   vec3 getColor(float layer, float dim) {
     float baseDim = floor(dim);
     float fracPart = dim - baseDim;
     float hue = mod((layer + 1.0) * TAU * TAU, 360.0) / 360.0;
 
     if (layer < baseDim) {
-      // Fully emerged dimension
       return hsv2rgb(vec3(hue, 0.85, 0.85));
     }
     if (layer == baseDim) {
-      // Partially emerged dimension
       float sat = 0.15 + 0.85 * fracPart;
-      float val = 0.85;
-      return hsv2rgb(vec3(hue, sat, val));
+      return hsv2rgb(vec3(hue, sat, 0.85));
     }
-    // Not emerged at all
     return vec3(0.0);
   }
 
-  // ------------------------------------------------------
-  // Dimension Emergence Opacity
-  //  - Below baseDim => fully emerged => 0.9
-  //  - Exactly baseDim => partial => 0.1..0.9
-  //  - Above => 0
-  // ------------------------------------------------------
   float getDimOpacity(float layer, float dim) {
     float baseDim = floor(dim);
     float fracPart = dim - baseDim;
 
     if (layer < baseDim) {
-      // fully emerged
       return 0.9;
     }
     else if (abs(layer - baseDim) < 0.5) {
-      // partial
-      // range: [0.1..0.9] => 0.1 + 0.8*fracPart
       return 0.1 + 0.8 * fracPart;
     }
-    // not emerged => 0
     return 0.0;
   }
 
@@ -101,84 +91,42 @@ const vertexShader = `
     vIsVertex = isVertex;
     vIsLine = isLine;
 
-    // ----------------------------------------------------
-    // Dimension-based anchor (with "nonLinearPhase")
-    // ----------------------------------------------------
-    float basePhase = TAU * layer / max(0.1, dimension);
-    float nonLinearPhase = basePhase + (symmetryBalance - 1.0) * PI * sin(basePhase);
+    WaveComponents waves = computeWaves(phase, layer, dimension);
 
-    // Let dimension origin scale from radius=1 to 2 with attractor
     float dimensionRadius = mix(1.0, 2.0, attractorStrength);
-    vec2 dimensionOrigin = dimensionRadius * vec2(
-      cos(nonLinearPhase),
-      sin(nonLinearPhase)
-    );
+    vec2 dimensionOrigin = dimensionRadius * waves.direction;
 
-    // ----------------------------------------------------
-    // 1) Compute a "base" circle around (0,0)
-    // ----------------------------------------------------
     vec2 basePos = vec2(0.0);
     if (isVertex > 0.5 || isLine > 0.5) {
-      // The dimension's main vertex on that scaled circle
       basePos = dimensionOrigin;
       gl_PointSize = (isVertex > 0.5) ? 8.0 : 1.0;
-
     } else {
-      // "Normal" wave-based points
-      float waveVal = sin(nonLinearPhase * (layer + 1.0));
-      float wave = waveAmplitude * waveVal;    // in [-waveAmp..+waveAmp]
-      float r = 1.0 + wave;
+      // Restore original wave computation
+      float r = 1.0 + waveAmplitude * waves.waveValue;
 
-      // oldAttractorDist from original code
-      float oldAttractorDist = attractorStrength * cos(phase - nonLinearPhase);
-      r += oldAttractorDist;
-
-      float c = cos(nonLinearPhase);
-      float s = sin(nonLinearPhase);
+      // Keep original attractor influence
+      float attractorDist = attractorStrength * cos(phase - waves.nonLinearPhase);
+      r += attractorDist;
 
       basePos = r * vec2(
-        c * cos(phase) - s * sin(phase),
-        c * sin(phase) + s * cos(phase)
+        waves.direction.x * cos(phase) - waves.direction.y * sin(phase),
+        waves.direction.x * sin(phase) + waves.direction.y * cos(phase)
       );
 
       gl_PointSize = 4.0;
     }
 
-    // ----------------------------------------------------
-    // 2) Lemniscate blending
-    // ----------------------------------------------------
-    vec2 lemnPos = getLemniscatePosition(phase + 0.5 * nonLinearPhase);
+    vec2 lemnPos = getLemniscatePosition(phase, waves);
     vec2 blendedPos = mix(basePos, lemnPos, lemniscateInfluence);
 
-    // ----------------------------------------------------
-    // 3) Folding around dimensionOrigin
-    // ----------------------------------------------------
     vec2 reflectionPos = 2.0 * dimensionOrigin - blendedPos;
     vec2 finalPos = mix(blendedPos, reflectionPos, 0.0);
 
-    // Output Position
     gl_Position = vec4(finalPos * 0.5, 0.0, 1.0);
 
-    // ----------------------------------------------------
-    // Color & dimension-based opacity
-    // ----------------------------------------------------
     vColor = getColor(layer, dimension);
-
-    // "Dimension Emergence" factor
-    float dimFactor = getDimOpacity(layer, dimension);
-
-    // Then multiply by base line/point opacities
-    // e.g., lines=0.8, normal points=0.9, vertices=1.0
-    float baseOpacity = 0.0;
-    if (isVertex > 0.5) {
-      baseOpacity = 1.0;
-    } else if (isLine > 0.5) {
-      baseOpacity = 0.8;
-    } else {
-      baseOpacity = 0.9;
-    }
-
-    vOpacity = baseOpacity * dimFactor;
+    float baseOpacity = isVertex > 0.5 ? 1.0 : (isLine > 0.5 ? 0.8 : 0.9);
+    vOpacity = baseOpacity * getDimOpacity(layer, dimension);
   }
 `;
 
@@ -191,7 +139,6 @@ const fragmentShader = `
   varying float vIsLine;
 
   void main() {
-    // For points, discard any fragment outside a circle
     if (vIsLine < 0.5) {
       vec2 cxy = 2.0 * gl_PointCoord - 1.0;
       float r = dot(cxy, cxy);
