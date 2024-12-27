@@ -214,7 +214,7 @@ const fragmentShader = `
 const UltrasphereViz = () => {
   // Existing reactive state
   const [dimension, setDimension] = useState(12.0);
-  const [layerDensity, setLayerDensity] = useState(4.0);
+  const [layerDensity, setLayerDensity] = useState(2.0);
   const [waveAmplitude, setWaveAmplitude] = useState(0.0);
   const [attractorStrength, setAttractorStrength] = useState(0.0);
   const [symmetryBalance, setSymmetryBalance] = useState(1.0);
@@ -419,7 +419,7 @@ const UltrasphereViz = () => {
           <div className="space-y-4">
             {[
               { icon: ArrowUpDown, value: dimension, setValue: setDimension, min: 0.1, max: 24, label: "Dimension" },
-              { icon: Maximize2, value: layerDensity, setValue: setLayerDensity, min: 0.1, max: 8, label: "Layer Density" },
+              { icon: Maximize2, value: layerDensity, setValue: setLayerDensity, min: 0.1, max: 4, label: "Layer Density" },
               { icon: Activity, value: waveAmplitude, setValue: setWaveAmplitude, min: -1, max: 1, label: "Wave Amplitude" },
               { icon: Move, value: attractorStrength, setValue: setAttractorStrength, min: -1, max: 1, label: "Attractor Strength" },
               { icon: Combine, value: symmetryBalance, setValue: setSymmetryBalance, min: 0, max: 2, label: "Symmetry Distribution" },
