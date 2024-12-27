@@ -16,7 +16,6 @@ const vertexShader = `
   uniform float attractorStrength;
   uniform float symmetryBalance;
   uniform float lemniscateInfluence;
-  uniform float rotationAngle;
 
   varying vec3 vColor;
   varying float vOpacity;
@@ -155,16 +154,7 @@ const vertexShader = `
     // 3) Folding around dimensionOrigin
     // ----------------------------------------------------
     vec2 reflectionPos = 2.0 * dimensionOrigin - blendedPos;
-    vec2 finalPosBeforeRotation = mix(blendedPos, reflectionPos, 0.0);
-
-    // ----------------------------------------------------
-    // 4) Rotation for final "camera" or global spin
-    // ----------------------------------------------------
-    mat2 rotationMat = mat2(
-      cos(rotationAngle), -sin(rotationAngle),
-      sin(rotationAngle),  cos(rotationAngle)
-    );
-    vec2 finalPos = rotationMat * finalPosBeforeRotation;
+    vec2 finalPos = mix(blendedPos, reflectionPos, 0.0);
 
     // Output Position
     gl_Position = vec4(finalPos * 0.5, 0.0, 1.0);
@@ -219,7 +209,6 @@ const UltrasphereViz = () => {
   const [attractorStrength, setAttractorStrength] = useState(0.0);
   const [symmetryBalance, setSymmetryBalance] = useState(1.0);
   const [lemniscateInfluence, setLemniscateInfluence] = useState(0.5);
-  const [rotationAngle, setRotationAngle] = useState(0.0);
 
   // WebGL Refs
   const canvasRef = useRef(null);
@@ -293,7 +282,6 @@ const UltrasphereViz = () => {
     gl.uniform1f(gl.getUniformLocation(program, 'attractorStrength'), attractorStrength);
     gl.uniform1f(gl.getUniformLocation(program, 'symmetryBalance'), symmetryBalance);
     gl.uniform1f(gl.getUniformLocation(program, 'lemniscateInfluence'), lemniscateInfluence);
-    gl.uniform1f(gl.getUniformLocation(program, 'rotationAngle'), rotationAngle);
 
     const numPoints = Math.floor(180 * layerDensity);
     const vertices = [];
@@ -387,7 +375,6 @@ const UltrasphereViz = () => {
     attractorStrength,
     symmetryBalance,
     lemniscateInfluence,
-    rotationAngle
   ]);
 
   // Initialize on mount
@@ -424,7 +411,6 @@ const UltrasphereViz = () => {
               { icon: Move, value: attractorStrength, setValue: setAttractorStrength, min: -1, max: 1, label: "Attractor Strength" },
               { icon: Combine, value: symmetryBalance, setValue: setSymmetryBalance, min: 0, max: 2, label: "Symmetry Distribution" },
               { icon: Combine, value: lemniscateInfluence, setValue: setLemniscateInfluence, min: 0, max: 1, label: "Lemniscate Influence" },
-              { icon: Combine, value: rotationAngle, setValue: setRotationAngle, min: 0, max: 6.283185307, label: "Rotation" },
             ].map(({ icon: Icon, value, setValue, min, max, label }) => (
               <div key={label} className="flex items-center space-x-4">
                 <Icon className="h-4 w-4" />
