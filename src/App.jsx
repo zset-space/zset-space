@@ -3,7 +3,6 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
 import { ArrowUpDown, Maximize2, Activity, Move, Combine } from 'lucide-react';
 
-// ------------------- VERTEX SHADER ---------------------
 const vertexShader = `
   attribute vec2 position;
   attribute float layer;
@@ -27,9 +26,13 @@ const vertexShader = `
 
   struct WaveComponents {
     float basePhase;          // Base dimensional phase
-    float nonLinearPhase;     // Phase with precession
+    float symmetryPhase;      // Phase with symmetry adjustment
+    float forwardPhase;       // Forward propagating phase
+    float backwardPhase;      // Backward propagating phase
     float waveValue;          // Combined wave value
     vec2 direction;           // Primary direction vector
+    vec2 conjugateDir;        // Conjugate direction
+    float phaseWeight;        // Weight between forward/backward
   };
 
   vec3 hsv2rgb(vec3 c) {
@@ -41,18 +44,35 @@ const vertexShader = `
   WaveComponents computeWaves(float phase, float layer, float dim) {
     WaveComponents w;
 
-    w.basePhase = TAU * layer / max(0.1, dim);
-    w.nonLinearPhase = w.basePhase + (symmetryBalance - 1.0) * PI * sin(w.basePhase);
+    float dimScale = max(0.1, dim);
+    w.basePhase = TAU * layer / dimScale;
 
-    // Keep the original wave computation that we know works
-    w.waveValue = sin(w.nonLinearPhase * (layer + 1.0));
-    w.direction = vec2(cos(w.nonLinearPhase), sin(w.nonLinearPhase));
+    // Symmetry adjustment
+    w.symmetryPhase = w.basePhase + (symmetryBalance - 1.0) * PI * sin(w.basePhase);
+
+    // Generate counter-rotating phases
+    w.forwardPhase = w.symmetryPhase;
+    w.backwardPhase = -w.symmetryPhase;
+
+    // Phase weight based on current phase
+    w.phaseWeight = cos(phase) * 0.5 + 0.5;
+
+    // Generate counter-rotating waves
+    float forwardWave = sin(w.forwardPhase * (layer + 1.0));
+    float backwardWave = sin(w.backwardPhase * (layer + 1.0));
+
+    // Weighted combination
+    w.waveValue = mix(forwardWave, backwardWave, w.phaseWeight);
+
+    // Store primary and conjugate directions
+    w.direction = vec2(cos(w.forwardPhase), sin(w.forwardPhase));
+    w.conjugateDir = vec2(cos(w.backwardPhase), sin(w.backwardPhase));
 
     return w;
   }
 
   vec2 getLemniscatePosition(float t, WaveComponents w) {
-    float u = 2.0 * (t + 0.5 * w.nonLinearPhase);
+    float u = 2.0 * (t + 0.5 * w.symmetryPhase);
     float sint = -sin(u);
     float cost = cos(u);
     float denom = 1.0 + sint * sint;
@@ -94,23 +114,31 @@ const vertexShader = `
     WaveComponents waves = computeWaves(phase, layer, dimension);
 
     float dimensionRadius = mix(1.0, 2.0, attractorStrength);
-    vec2 dimensionOrigin = dimensionRadius * waves.direction;
 
-    vec2 basePos = vec2(0.0);
-    if (isVertex > 0.5 || isLine > 0.5) {
-      basePos = dimensionOrigin;
-      gl_PointSize = (isVertex > 0.5) ? 8.0 : 1.0;
-    } else {
-      // Restore original wave computation
+    // Handle vertices from both perspectives
+    vec2 posOrigin = dimensionRadius * waves.direction;
+    vec2 negOrigin = dimensionRadius * waves.conjugateDir;
+
+    // Switch between forward and backward perspectives
+    vec2 dimensionOrigin = mix(posOrigin, negOrigin, waves.phaseWeight);
+
+    vec2 basePos = posOrigin;
+    gl_PointSize = (isVertex > 0.5) ? 8.0 : 1.0;
+    if (isVertex < 0.5 && isLine < 0.5) {
       float r = 1.0 + waveAmplitude * waves.waveValue;
 
-      // Keep original attractor influence
-      float attractorDist = attractorStrength * cos(phase - waves.nonLinearPhase);
+      // Blend attractor influence
+      float forwardAttractor = cos(phase - waves.forwardPhase);
+      float backwardAttractor = cos(phase - waves.backwardPhase);
+      float attractorDist = attractorStrength *
+        mix(forwardAttractor, backwardAttractor, waves.phaseWeight);
       r += attractorDist;
 
+      // Use blended direction
+      vec2 blendedDir = mix(waves.direction, waves.conjugateDir, waves.phaseWeight);
       basePos = r * vec2(
-        waves.direction.x * cos(phase) - waves.direction.y * sin(phase),
-        waves.direction.x * sin(phase) + waves.direction.y * cos(phase)
+        blendedDir.x * cos(phase) - blendedDir.y * sin(phase),
+        blendedDir.x * sin(phase) + blendedDir.y * cos(phase)
       );
 
       gl_PointSize = 4.0;
@@ -130,7 +158,6 @@ const vertexShader = `
   }
 `;
 
-// ------------------- FRAGMENT SHADER ---------------------
 const fragmentShader = `
   precision mediump float;
   varying vec3 vColor;
@@ -150,12 +177,12 @@ const fragmentShader = `
 
 const UltrasphereViz = () => {
   // Existing reactive state
-  const [dimension, setDimension] = useState(12.0);
-  const [layerDensity, setLayerDensity] = useState(2.0);
+  const [dimension, setDimension] = useState(8.0);
+  const [layerDensity, setLayerDensity] = useState(3.0);
   const [waveAmplitude, setWaveAmplitude] = useState(0.0);
   const [attractorStrength, setAttractorStrength] = useState(0.0);
   const [symmetryBalance, setSymmetryBalance] = useState(1.0);
-  const [lemniscateInfluence, setLemniscateInfluence] = useState(0.5);
+  const [lemniscateInfluence, setLemniscateInfluence] = useState(0.0);
 
   // WebGL Refs
   const canvasRef = useRef(null);
@@ -353,11 +380,11 @@ const UltrasphereViz = () => {
           <div className="space-y-4">
             {[
               { icon: ArrowUpDown, value: dimension, setValue: setDimension, min: 0.1, max: 24, label: "Dimension" },
-              { icon: Maximize2, value: layerDensity, setValue: setLayerDensity, min: 0.1, max: 4, label: "Layer Density" },
+              { icon: Maximize2, value: layerDensity, setValue: setLayerDensity, min: 0.1, max: 6, label: "Layer Density" },
               { icon: Activity, value: waveAmplitude, setValue: setWaveAmplitude, min: -1, max: 1, label: "Wave Amplitude" },
               { icon: Move, value: attractorStrength, setValue: setAttractorStrength, min: -1, max: 1, label: "Attractor Strength" },
               { icon: Combine, value: symmetryBalance, setValue: setSymmetryBalance, min: 0, max: 2, label: "Symmetry Distribution" },
-              { icon: Combine, value: lemniscateInfluence, setValue: setLemniscateInfluence, min: 0, max: 1, label: "Lemniscate Influence" },
+              { icon: Combine, value: lemniscateInfluence, setValue: setLemniscateInfluence, min: -1, max: 1, label: "Lemniscate Influence" },
             ].map(({ icon: Icon, value, setValue, min, max, label }) => (
               <div key={label} className="flex items-center space-x-4">
                 <Icon className="h-4 w-4" />
