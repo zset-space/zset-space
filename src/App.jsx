@@ -177,7 +177,7 @@ const fragmentShader = `
 
 const UltrasphereViz = () => {
   // Existing reactive state
-  const [dimension, setDimension] = useState(8.0);
+  const [dimension, setDimension] = useState(12.0);
   const [layerDensity, setLayerDensity] = useState(3.0);
   const [waveAmplitude, setWaveAmplitude] = useState(0.0);
   const [attractorStrength, setAttractorStrength] = useState(0.0);
