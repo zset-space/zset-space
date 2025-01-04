@@ -24,13 +24,13 @@ The phase function fn(d) = π/(d(d+1)) serves as the mathematical embodiment of 
 
 The phase function manifests through three critical transitions, each representing a necessary stage in dimensional evolution:
 
-First Order Transition (d=1):
+**First Order Transition (d=1):**
 The initial transition, with fn(1) = π/2, represents the minimal geometric operation necessary to establish complex structure. This quarter-turn rotation transforms the primitive -1/1 opposition into the -i/i relationship, creating the first rotational degree of freedom. This transformation isn't merely convenient but represents the only possible way to establish a new geometric relationship while preserving the original opposition.
 
-Second Order Transition (d=2):
+**Second Order Transition (d=2):**
 The second transition, with fn(2) = π/6, demonstrates how geometric necessity forces the emergence of third roots of unity. The phase ratio fn(2)/fn(1) = 1/3 represents the only possible relationship that can both preserve the quarter-turn template and establish planar freedom. This transition reveals how rotational freedom must be exchanged between dimensions to maintain geometric stability.
 
-Third Order Transition (d=3):
+**Third Order Transition (d=3):**
 The final transition, with fn(3) = π/12, establishes permanent geometric stability through a precise balance of bulk and surface contributions. The phase ratio fn(3)/fn(2) = 1/2 forces four-fold symmetry emergence as the only possible configuration that can stabilize three-dimensional structure. The total rotational exchange ratio fn(3)/fn(1) = 1/6 represents the complete geometric necessity of this configuration.
 
 ### Phase Structure and Freedom Exchange
@@ -45,22 +45,13 @@ The surface term manages boundary constraints, appearing as the real component a
 
 The system incorporates fundamental relationships between n-balls of varying dimensions, revealing deep connections between volume, surface area, and dimensional evolution through precise mathematical ratios:
 
-Critical Identities:
-- V(d) = S(d)/d
-- V(d) = S(d+1)/τ
-- S(d) = S(d+1)*d/τ
-- S(d+1) = S(d)*τ/d
-- V(d+1) = S(d)*τ/(d(d+1))
-
-These relationships reveal how surface and volume measures interweave through dimensional evolution:
-
 | Dimension | Volume πⁿ Form | Volume τⁿ Form | Surface πⁿ Form | Surface τⁿ Form | Decimal Values (V, SA) |
 |-----------|----------------|-----------------|------------------|------------------|------------------------|
 | 0 | π⁰ | τ⁰ | 0 | 0 | 1.00000000, 0.00000000 |
 | 1 | 2π⁰ | 2τ⁰ | 2π⁰ | 2τ⁰ | 2.00000000, 2.00000000 |
 | 2 | π¹ | τ¹/2 | 2π¹ | τ¹ | 3.14159265, 6.28318531 |
 | 3 | 4π¹/3 | 2τ¹/3 | 4π¹ | 2τ¹ | 4.18879020, 12.56637061 |
-| 4 | π² | τ²/8 | π² | τ²/4 | 4.93480220, 9.86960440 |
+| 4 | π²/2 | τ²/8 | 2π² | τ²/4 | 4.93480220, 9.86960440 |
 | 5 | 8π²/15 | 2τ²/15 | 8π²/3 | 2τ²/3 | 5.26378901, 26.31894507 |
 | 6 | π³/6 | τ³/48 | 16π³/15 | 2τ³/15 | 5.16771278, 33.07336179 |
 | 7 | 16π³/105 | 2τ³/105 | π⁴/3 | τ⁴/48 | 4.72476597, 32.46969701 |
@@ -84,20 +75,20 @@ The system implements a three-tier architecture that bridges theoretical foundat
 
 The ZSET class serves as the heart of the visualization system, managing the complex relationship between mathematical concepts and their visual representation. Its requirements emerge directly from theoretical necessities:
 
-Uniform Management System:
+**Uniform Management System**:
 - Clear separation between core dimensional parameters and effect parameters
 - Efficient Map-based caching reflecting relationship preservation
 - Runtime uniform discovery enabling shader switching while preserving state
 - Support for both core ranges and standardized effect ranges
 
-WebGL State Management:
+**WebGL State Management**:
 - Instance-based rendering from single central point geometry
 - Proper resource lifecycle management
 - Context loss recovery mechanisms
 - Complete cleanup procedures
 - Efficient binding strategies
 
-Shader Management:
+**Shader Management**:
 - Asynchronous shader loading with error handling
 - Program linkage verification
 - Resource cleanup after successful program creation
@@ -107,15 +98,15 @@ Shader Management:
 
 The interface layer transforms mathematical framework into interactive experience:
 
-Control Interface:
+**Control Interface**:
 - Dynamic shader selection through dropdown interface
 - Automatic control generation based on discovered shader uniforms
 - Clear separation between fundamental parameters and effect modifiers
 - Real-time visual feedback for all parameter changes
 
-Parameter Range Management:
+**Parameter Range Management**:
 - Core parameters using domain-specific ranges reflecting mathematical significance
-- Effect parameters standardized to [-1, 1] range for consistency
+- Effect parameters standardized to [-1, 1] range for consistency (now [-2, 2] per update)
 - Clear documentation of parameter relationships and constraints
 - Proper validation of all parameter changes
 
@@ -123,7 +114,7 @@ Parameter Range Management:
 
 The configuration tier provides structural framework unifying mathematical concepts with implementation:
 
-Parameter Categories:
+**Parameter Categories**:
 - Core ranges defining fundamental mathematical space
 - Standardized effect ranges for visual transformations
 - Shader metadata connecting implementation with documentation
@@ -133,20 +124,20 @@ Parameter Categories:
 
 The rendering approach directly reflects the system's theoretical foundation:
 
-Instance-Based Representation:
+**Instance-Based Representation**:
 - Single central point (0,0) representing zero-dimensional state
 - Instance count determined by Math.ceil(dimension)
 - Density parameter controlling points per instance
 - Central positioning maintaining conceptual integrity
 - Instance differentiation through gl_InstanceID
 
-WebGL Implementation:
+**WebGL Implementation**:
 - WebGL 2.0 context with alpha blending
 - Proper extension checking and fallbacks
 - Comprehensive context loss handling
 - Efficient resource management
 
-Shader Architecture:
+**Shader Architecture**:
 - Vertex shader reflecting dimensional transitions
 - Fragment shader enabling smooth visual evolution
 - Uniform conventions maintaining theoretical consistency
@@ -156,19 +147,19 @@ Shader Architecture:
 
 The system requires comprehensive state management ensuring theoretical integrity:
 
-Shader State:
+**Shader State**:
 - Path caching for context recovery
 - Compilation state tracking
 - Linkage verification
 - Resource cleanup
 
-Uniform Management:
+**Uniform Management**:
 - Map-based location caching
 - Separate tracking of defaults and current state
 - Type validation
 - Separation of core and effect uniforms
 
-Buffer Management:
+**Buffer Management**:
 - Minimal position buffer
 - Cached attribute locations
 - Clear cleanup procedures
@@ -176,14 +167,14 @@ Buffer Management:
 
 ### Performance and Error Management
 
-Performance Requirements:
+**Performance Requirements**:
 - Efficient instance-based rendering
 - Minimal geometry complexity
 - Cached uniform locations
 - Batched state updates
 - Appropriate context options
 
-Error Management:
+**Error Management**:
 - Context creation validation
 - Shader compilation verification
 - Program linkage confirmation
@@ -197,16 +188,16 @@ Error Management:
 
 The unified framework points toward several critical areas for further investigation:
 
-Immediate Priorities:
+**Immediate Priorities**:
 1. Zero-sphere inversion mechanism in smooth dimensions
 2. Phase ratio relationship to bulk-surface equilibrium
 3. Connection between rotational freedom and quantum emergence
 
-Mathematical Development:
+**Mathematical Development**:
 2. Derivation of bulk-surface equilibrium from phase structure
 3. Explicit connection to volume-surface relationships in n-balls
 
-Core Philosophy:
+**Core Philosophy**:
 1. Pure geometric necessity driving all development
 2. Mathematical structures emerging organically
 3. Explicit forms taking precedence over abstractions
