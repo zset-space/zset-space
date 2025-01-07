@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Renderer from './zset/renderer';
 import Perf from './components/perf';
 import Config from './config';
-import { PatternType } from './zset/patterns';
+import { Patterns } from './zset/patterns';
 import './index.css';
 import './app.css';
 
@@ -74,7 +74,7 @@ function DropdownControl({ label, value, options, onChange, disabled }) {
   );
 }
 
-const patternOptions = Object.entries(PatternType).map(([key, value]) => ({
+const patternOptions = Object.entries(Patterns).map(([key, value]) => ({
   value,
   label: key.toLowerCase()
 }));
@@ -84,30 +84,15 @@ const shaderOptions = Object.keys(Config.SHADERS).map((key) => ({
   label: key
 }));
 
-function makeControl(name, rangeObj) {
-  return {
-    name,
-    min: rangeObj.min,
-    max: rangeObj.max,
-    step: 0.01,
-    value: rangeObj.default
-  };
-}
-
 export default function App() {
   const canvasRef = useRef(null);
   const engineRef = useRef(null);
 
-  const [pattern, setPattern] = useState(PatternType.CIRCLE);
-  const [shaderKey, setShaderKey] = useState(Config.DEFAULT_SHADER);
-  const [shaderControls, setShaderControls] = useState([]);
+  const [pattern, setPattern] = useState(Patterns.CIRCLE);
+  const [shader, setShader] = useState(Object.keys(Config.SHADERS)[0]);
+  const [controls, setControls] = useState([]);
   const [error, setError] = useState(null);
   const [initing, setIniting] = useState(true);
-
-  const patternControlsInit = ['offset']
-    .filter((key) => !!Config.CONTROL_RANGES[key])
-    .map((key) => makeControl(key, Config.CONTROL_RANGES[key]));
-  const [patternControls, setPatternControls] = useState(patternControlsInit);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -120,7 +105,7 @@ export default function App() {
         engineRef.current?.dispose();
         engineRef.current = new Renderer(canvasRef.current);
 
-        const { vertex, fragment } = Config.SHADERS[shaderKey];
+        const { vertex, fragment } = Config.SHADERS[shader];
         await engineRef.current.loadProgram(vertex, fragment);
 
         const discovered = engineRef.current.getControls();
@@ -131,7 +116,7 @@ export default function App() {
           step: 0.01,
           value: ctrl.value
         }));
-        setShaderControls(newShaderControls);
+        setControls(newShaderControls);
       } catch (err) {
         console.error('Initialization error:', err);
         setError(err.message);
@@ -142,22 +127,15 @@ export default function App() {
 
     initRenderer();
     return () => engineRef.current?.dispose();
-  }, [shaderKey]);
+  }, [shader]);
 
   useEffect(() => {
     if (!engineRef.current || initing || error) return;
     engineRef.current.setPattern(pattern);
   }, [pattern, initing, error]);
 
-  function handlePatternControlChange(name, val) {
-    setPatternControls((prev) =>
-      prev.map((ctrl) => (ctrl.name === name ? { ...ctrl, value: val } : ctrl))
-    );
-    engineRef.current?.update({ [name]: val });
-  }
-
   function handleShaderControlChange(name, val) {
-    setShaderControls((prev) =>
+    setControls((prev) =>
       prev.map((ctrl) => (ctrl.name === name ? { ...ctrl, value: val } : ctrl))
     );
     engineRef.current?.update({ [name]: val });
@@ -186,28 +164,12 @@ export default function App() {
       <div style={frameStyle}>
         <DropdownControl
           label="shader"
-          value={shaderKey}
+          value={shader}
           options={shaderOptions}
-          onChange={setShaderKey}
+          onChange={setShader}
           disabled={initing}
         />
 
-        {shaderControls.map((ctrl) => (
-          <SliderControl
-            key={ctrl.name}
-            label={ctrl.name}
-            min={ctrl.min}
-            max={ctrl.max}
-            step={ctrl.step}
-            value={ctrl.value}
-            onChange={(val) => handleShaderControlChange(ctrl.name, val)}
-            disabled={initing}
-          />
-        ))}
-      </div>
-
-      {/* Pattern Section */}
-      <div style={frameStyle}>
         <DropdownControl
           label="pattern"
           value={pattern}
@@ -216,7 +178,7 @@ export default function App() {
           disabled={initing}
         />
 
-        {patternControls.map((ctrl) => (
+        {controls.map((ctrl) => (
           <SliderControl
             key={ctrl.name}
             label={ctrl.name}
@@ -224,7 +186,7 @@ export default function App() {
             max={ctrl.max}
             step={ctrl.step}
             value={ctrl.value}
-            onChange={(val) => handlePatternControlChange(ctrl.name, val)}
+            onChange={(val) => handleShaderControlChange(ctrl.name, val)}
             disabled={initing}
           />
         ))}

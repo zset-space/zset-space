@@ -7,16 +7,19 @@ in float vOpacity;
 out vec4 fragColor;
 
 void main() {
-    // Create soft circular points
+    // Enhanced soft circular points with stronger edge effects
     vec2 coord = 2.0 * gl_PointCoord - 1.0;
     float r = dot(coord, coord);
 
-    // Discard pixels outside the circle
     if (r > 1.0) {
         discard;
     }
 
-    // Smooth edge falloff
-    float fade = 1.0 - smoothstep(0.8, 1.0, r);
-    fragColor = vec4(vColor, vOpacity * fade);
+    // Stronger radial fade for wave-like effect
+    float fade = 1.0 - smoothstep(0.7, 1.0, r);
+
+    // Add subtle radial color variation
+    vec3 finalColor = vColor * (1.0 + 0.1 * (1.0 - r));
+
+    fragColor = vec4(finalColor, vOpacity * fade);
 }

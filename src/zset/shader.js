@@ -70,7 +70,7 @@ export default class Shader {
       // Otherwise, we default to [-2, 2].
       let uniformRange;
       if (name === 'energy') {
-        uniformRange = Config.CONTROL_RANGES.energy;
+        uniformRange = Config.CONTROL_RANGES.energy.range;
       } else {
         // Regardless of what might be in Config, we force [-2, 2] for non-energy
         uniformRange = {

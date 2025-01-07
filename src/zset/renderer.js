@@ -1,7 +1,7 @@
 import Config from '../config';
 import Shader from './shader';
 import Params from './params';
-import { PatternType, generatePattern } from './patterns';
+import { Patterns, generatePattern } from './patterns';
 
 export default class Renderer {
   constructor(canvas) {
@@ -9,10 +9,13 @@ export default class Renderer {
     this.gl = null;
     this.shader = null;
     this.params = new Params();
+    this.params.initFromUniforms(
+      new Map(Object.entries(Config.CONTROL_RANGES))
+    );
 
     this.patternBuffer = null;
     this.patternLocation = -1;
-    this.currentPattern = PatternType.CIRCLE;
+    this.currentPattern = Patterns.CIRCLE;
     this._maxVerts = Config.MAX_VERTICES;
     this.contextLost = false;
 
@@ -51,19 +54,7 @@ export default class Renderer {
 
       // Get discovered uniforms and their ranges
       const activeUniforms = this.shader.getActiveUniforms();
-
-      // Initialize parameters with discovered uniforms
       this.params.initFromUniforms(activeUniforms);
-
-      // We set initial values from the uniform range definitions themselves.
-      // If 'energy' is discovered, it's already from Config.CONTROL_RANGES.energy.
-      // For everything else, we have [-2, 2].
-      const defaults = {};
-      activeUniforms.forEach((info, name) => {
-        defaults[name] = info.range.default;
-      });
-      this.params.set(defaults);
-
       this._createGeometry();
       this.update(this.params.getAll());
 
@@ -97,7 +88,7 @@ export default class Renderer {
     }
 
     const values = this.params.getAll();
-    const energy = values.energy ?? Config.DEFAULT_ENERGY;
+    const energy = values.energy ?? Config.CONTROL_RANGES.energy.range.default;
     const energyFloor = Math.floor(energy);
     const instanceCount = Math.max(0, energyFloor + 1);
 
@@ -116,6 +107,12 @@ export default class Renderer {
   }
 
   _createGeometry() {
+    // Add guard for shader program
+    if (!this.shader?.program) {
+      console.warn('Attempted to create geometry before shader was ready');
+      return;
+    }
+
     const gl = this.gl;
     const values = this.params.getAll();
     const offset = values.offset ?? 0;  // If not present, 0

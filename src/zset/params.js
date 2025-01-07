@@ -58,32 +58,4 @@ export default class Params {
     });
     return result;
   }
-
-  // Set the current pattern type
-  setPattern(pattern) {
-    this.pattern = pattern;
-  }
-
-  // Get the current pattern type
-  getPattern() {
-    return this.pattern;
-  }
-
-  // Reset all parameters to their default values
-  reset() {
-    this.ranges.forEach((range, name) => {
-      this.values.set(name, range.default);
-    });
-    this.pattern = null;
-  }
-
-  // Check if a parameter exists
-  has(name) {
-    return this.ranges.has(name);
-  }
-
-  // Get list of all parameter names
-  getParameterNames() {
-    return Array.from(this.ranges.keys());
-  }
 }
