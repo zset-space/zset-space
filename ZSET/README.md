@@ -1486,36 +1486,3 @@ advancing our understanding of quantum phenomena across multiple
 domains. By maintaining connection to its geometric foundation while
 suggesting natural extensions, the framework provides a new *basis* for
 future theoretical exploration.
-
-<div class="acknowledgements">
-
-This work benefited significantly from the democratization of knowledge
-through online resources, particularly Wikipedia’s extensive collection
-of mathematical and physical concepts. The accessibility of such
-resources proved invaluable for developing the mathematical framework
-presented here.
-
-The author acknowledges the transformative role of artificial
-intelligence assistants in accelerating the development and articulation
-of these ideas. In particular, OpenAI’s ChatGPT and Anthropic’s Claude
-served as invaluable partners in exploring mathematical relationships,
-refining theoretical concepts, and structuring the presentation of this
-work. Their complementary capabilities enabled rapid iteration and
-refinement of the framework while maintaining mathematical consistency.
-
-Special appreciation is extended to the broader scientific community
-whose published works, though not directly cited, have collectively
-shaped the intellectual foundation underlying this theoretical
-framework. The author’s understanding has been enriched by numerous
-online discussions, lectures, and educational resources that have made
-complex physical and mathematical concepts more accessible.
-
-Above all, the author expresses deepest gratitude to his wife and family
-for their unwavering support and patience throughout this work’s
-development. Their encouragement and understanding were instrumental in
-bringing these ideas to fruition.
-
-The views and theoretical framework presented in this paper are solely
-those of the author, as are any errors or oversights that may remain.
-
-</div>
